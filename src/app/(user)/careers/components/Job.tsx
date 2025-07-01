@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import JobCard from "./JobCard";
 import JobApply from "./JobApply";
 import NoOpeningsCard from "./NoOpening";
@@ -7,7 +7,13 @@ import Modal from "@/components/functionality/Modal";
 import JobCardSkeleton from "./JobcardSkelton";
 import { useQuery } from "@tanstack/react-query";
 import { getJobs } from "@/services/services";
+import { createUserAction, getUserAction } from "@/utills/actions/User";
 
+type UserT = {
+  id: number;
+  name: string;
+  email: string;
+};
 export interface Job {
   _id: string;
   title: string;
@@ -18,25 +24,43 @@ export interface Job {
   location: string;
 }
 
-
-
-
 export const Job: React.FC = () => {
-  
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<string>("");
-   const {isPending, data:jobs} = useQuery(getJobs())
+  const { isPending, data: jobs } = useQuery(getJobs());
+  const [userState, setUser] = useState<UserT[]>([]);
+  const createUser11 = async () => {
+    const user = await createUserAction();
+    console.log(user);
+  };
 
+  React.useEffect(() => {
+    async function fetchU() {
+      const userF: UserT[] = await getUserAction();
+      setUser(userF);
+    }
 
-
+    fetchU();
+  }, [useState]);
 
   return (
     <div className="md:mt-36 mb-24">
       <div className="relative mb-12">
+        <div className="bg-red-100 w-full">
+          {userState?.map((userr) => (
+            <p key={userr.id} className="text-white  bg-red-600 ">
+              {userr.id} {userr.name}
+            </p>
+          ))}
+          <h1>fdfd</h1>
+        </div>
         <h1 className="text-3xl font-bold absolute -top-7 left-0 right-0 text-center text-blue-950 bg-gradient-to-b from-OMblue/20 via-OMblue/10 to-transparent bg-clip-text ">
           OPPORTUNITIES
         </h1>
-        <h1 className="text-4xl font-bold text-center text-blue-950">
+        <h1
+          onClick={createUser11}
+          className="text-4xl font-bold text-center text-blue-950 bg-red-200"
+        >
           Explore Our Job Opportunities
         </h1>
       </div>
@@ -47,7 +71,7 @@ export const Job: React.FC = () => {
         ) : (
           <>
             {jobs && jobs.length > 0 ? (
-              jobs.map((job:Job) => (
+              jobs.map((job: Job) => (
                 <JobCard
                   key={job._id}
                   jobId={job._id}
