@@ -45,7 +45,7 @@ const Navmenu: React.FC<NavmenuProps> = ({ pathname }) => {
       const isActiveDropdown = isDropdownActive(currentPath)
 
       return (
-        <AnimatePresence>
+        <AnimatePresence key={`MENU_${level}_${index}_anim`}>
           <div
             key={`MENU_${level}_${index}`}
             className='relative'
@@ -105,6 +105,7 @@ const Navmenu: React.FC<NavmenuProps> = ({ pathname }) => {
                   level === 0 ? 'top-full left-0 ' : 'top-0 left-full ml-1'
                 )}
               >
+
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
