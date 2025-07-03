@@ -1,65 +1,23 @@
-import { fetchBlogByTitle } from "@/services/services";
-import Blog from "../Blog";
-import { Metadata, ResolvingMetadata } from "next";
+import React from "react";
+import Blog from "../components/common/Blog";
+import Sidebar from "../components/sidebar/Sidebar";
+import Checkpoints from "./components/Checkpoints";
 
-type PageProps = {
-  params: {
-    title: string;
-  };
-  searchParams: { [key: string]: string | string[] | undefined };
+const SingleBlogPage = () => {
+  return (
+    <div className="grid grid-cols-12 gap-3 ">
+      <div className="lg:col-span-3 hidden lg:flex py-12">
+        {/* <Sidebar /> */}
+      </div>
+      <div className=" lg:col-span-6 col-span-12 py-12">
+        <Blog />
+      </div>
 
+      <div className=" lg:col-span-3 hidden lg:flex border-l  ">
+        <Checkpoints />
+      </div>
+    </div>
+  );
 };
 
-export async function generateMetadata({ params }: PageProps,
-  _parent: ResolvingMetadata
-): Promise<Metadata> {
-  const decodedTitle = decodeURIComponent(params.title)
-    .replace(/\?/g, "~")
-    .replace(/\s+/g, "_");
-
-  const blog = await fetchBlogByTitle(decodedTitle);
-
-  return {
-    title: `${blog.title}   `,
-    description: blog.content.substring(0, 160),
-    openGraph: {
-      title: blog.title,
-      description: blog.content.substring(0, 160),
-      images: [blog.image],
-      type: "article"
-    },
-    alternates: {
-      canonical: `https://yoursite.com/blog/${params.title}`
-    }
-  };
-}
-
-export default async function Page({ params }: PageProps) {
-  const decodedTitle = decodeURIComponent(params.title)
-    .replace(/\?/g, "~")
-    .replace(/\s+/g, "_");
-
-  const blog = await fetchBlogByTitle(decodedTitle);
-
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: blog.title,
-            description: blog.content.substring(0, 160),
-            image: blog.image,
-            author: {
-              "@type": "Person",
-              name: "Author Name"
-            }
-          })
-        }}
-      />
-      <Blog blog={blog} />
-    </>
-  );
-}
+export default SingleBlogPage;

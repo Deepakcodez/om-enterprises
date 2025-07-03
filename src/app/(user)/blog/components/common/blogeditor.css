@@ -1,0 +1,82 @@
+/* globals.css or your CSS file */
+.tiptap-editor {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .menu-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  
+  .menu-bar button,
+  .menu-bar select {
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+  }
+  
+  .menu-bar button.is-active,
+  .menu-bar select option:checked {
+    background: #ddd;
+  }
+  
+  .bubble-menu,
+  .floating-menu {
+    display: flex;
+    gap: 8px;
+    background: white;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Basic editor styling */
+  .ProseMirror {
+    min-height: 200px;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .ProseMirror:focus {
+    outline: none;
+    border-color: #646cff;
+  }
+  
+  /* Table styling */
+  .ProseMirror table {
+    border-collapse: collapse;
+    margin: 0;
+    overflow: hidden;
+  }
+  
+  .ProseMirror table td,
+  .ProseMirror table th {
+    min-width: 1em;
+    border: 1px solid #ddd;
+    padding: 3px 5px;
+    vertical-align: top;
+    box-sizing: border-box;
+    position: relative;
+  }
+  
+  .ProseMirror table th {
+    background-color: #f1f3f5;
+    text-align: left;
+  }
+  
+  /* Image styling */
+  .ProseMirror img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .ProseMirror img.ProseMirror-selectednode {
+    outline: 3px solid #646cff;
+  }

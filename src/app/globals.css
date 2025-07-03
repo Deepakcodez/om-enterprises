@@ -10,8 +10,8 @@
     --color-primary: #9b59b6 ;
       --color-OMblue: #9b59b6 ;
     --color-primary1: #c58adb ;
-      --screen-3xl: 2560px;
-    --3xl: 1960px;
+      --breakpoint-4xl: 2560px;
+    
  
 }
 
