@@ -12,7 +12,6 @@ const nextConfig: NextConfig = {
       "static.vecteezy.com",
       "cdn.vectorstock.com",
       "res.cloudinary.com"
-
     ],
   },
 };

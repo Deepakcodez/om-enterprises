@@ -10,7 +10,7 @@ export const menus = [
     submenu: [
       {
         name: "Messaging",
-        link: "/services",
+        link: "/services/messaging/a2p-messaging",
         submenu: [
           { name: "A2P Messaging", link: "/services/messaging/a2p-messaging" },
           { name: "RCS Business Messaging", link: "/services/messaging/rcs-business-messaging" },
@@ -22,7 +22,7 @@ export const menus = [
       },
       {
         name: "Operator",
-        link: "/services",
+        link: "/services/operator/smsc",
         submenu: [
           { name: "SMSC", link: "/services/operator/smsc" },
           { name: "Instant Virtual Number", link: "/services/operator/virtual-number" }
@@ -30,7 +30,7 @@ export const menus = [
       },
       {
         name: "Voice",
-        link: "/services",
+        link: "/services/voice/outbound-dialer",
         submenu: [
           { name: "Outbound Dealer", link: "/services/voice/outbound-dialer" },
           { name: "IVR", link: "/services/voice/ivr" },
@@ -41,31 +41,28 @@ export const menus = [
       },
       {
         name: "Marketing",
-        link: "/services",
+        link: "/services/marketing/email-marketing",
         submenu: [{ name: "Email Marketing", link: "/services/marketing/email-marketing" }]
       },
       { 
         name: "Identity", 
-        link: "/services", 
+        link: "/services/identity/verified-sms", 
         submenu: [{ name: "Verified SMS", link: "/services/identity/verified-sms" }]
       },
       { 
         name: "Website Development", 
-        link: "/services",
+        link: "/services/web-development/web-designing",
         submenu: [
+          { name: "Web Development ", link: "/services/web-development/web-development" },
           { name: "Website Designing", link: "/services/web-development/web-designing" },
-          { name: "Web Development Features", link: "/services/web-development/web-development-features" }
         ]
       }
     ]
   },
-
-
     {
       name: "Pricing",
       link: "/pricing"
     },
-    
     {
       name: "Careers",
       link: "/careers"
