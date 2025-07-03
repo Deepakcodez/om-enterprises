@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://omtel.ae"),
   title: {
    default: "Om Enterprises",
     template: "%s | OM Enterprises" ,
@@ -24,14 +25,14 @@ export const metadata: Metadata = {
   description:
     "OM Enterprises provides bulk SMS services and comprehensive digital marketing solutions.",
   keywords: ["bulk sms", "digital marketing", "sms services"],
-  //  twitter: {
-  //   card: 'summary_large_image',
-  //   title: 'About Us ',
-  //   description: 'Discover the story behind Your Company Name and meet the team driving our success.',
-  //   images: "../assets/icons/favicon.ico",
-  //   site: '@yourcompany',
-  //   creator: '@yourcompany',
-  // },
+   twitter: {
+    card: 'summary_large_image',
+    title: 'OM Enterprises',
+    description: 'Discover the story behind OM Enterprises and meet the team driving our success.',
+    images: "../assets/images/fullllogo.png",
+    site: '@omenterprises',
+    creator: '@omenterprises',
+  },
 
 };
 export default function RootLayout({
