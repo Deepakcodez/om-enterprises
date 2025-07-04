@@ -26,3 +26,15 @@ export type UpdatePlanProps = {
 }
 
 
+export interface BLogType {
+    _id:       string;
+    image:     string;
+    title:     string;
+    content:   string;
+    url :     string;
+    tags?:  string[];
+    date:      Date;
+    createdAt: Date;
+    updatedAt: Date;
+    __v:       number;
+}

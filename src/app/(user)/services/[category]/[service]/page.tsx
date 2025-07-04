@@ -3,7 +3,7 @@ import { slugToIdMap } from "./slug-to-id";
 
 const  ServiceDetailPage = async ({
   params,
-}: {
+}: {  
   params: Promise<{ category: string , service:string}>
 }) => {
   const  param = await params;

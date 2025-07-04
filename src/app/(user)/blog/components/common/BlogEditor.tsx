@@ -125,7 +125,8 @@ const Tiptap = () => {
               value={editor.getAttributes("heading").level}
               onChange={(e) => {
                 const level = parseInt(e.target.value);
-                editor.chain().focus().toggleHeading({ level }).run();
+                // editor.chain().focus().toggleHeading({ level  }).run();
+                editor.chain().focus().run();
               }}
             >
               <option value="0">Normal text</option>
@@ -285,7 +286,8 @@ const Tiptap = () => {
                   Italic
                 </button>
                 <button
-                  onClick={() => editor.chain().focus().toggleLink().run()}
+                  // onClick={() => editor.chain().focus().toggleLink().run()}
+                  onClick={() => editor.chain().focus().run()}
                   className={editor.isActive("link") ? "is-active" : ""}
                 >
                   Link

@@ -11,7 +11,6 @@ import { testserver } from "@/utills/action";
 
 const Career = async() => {
     
-  const user = await testserver();
   return (
     <>
       <Head>
@@ -23,7 +22,6 @@ const Career = async() => {
           content="Digital marketing blog, sms marketing, email marketing, social media marketing, content marketing, paid media marketing, search engine marketing, web development, app development, bulk sms."
         />
       </Head>
-      <p>{user.title}</p>
       <WideScreenHandler>
         <XpaddingWrapper>
           <CareerHero />
