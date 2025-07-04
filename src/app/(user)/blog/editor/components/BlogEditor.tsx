@@ -22,7 +22,7 @@ import Underline from "@tiptap/extension-underline";
 import { BubbleMenu, FloatingMenu } from "@tiptap/react";
 import CharacterCount from "@tiptap/extension-character-count";
 
-import "../common/blogeditor.css";
+import "./blogeditor.css";
 import { FaBold, FaCentercode, FaItalic, FaUnderline } from "react-icons/fa";
 import { AlignCenter, AlignJustify, AlignLeft, AlignRight, Link2, MarsStroke, MoveLeft, Scissors, Table2, Trash } from "lucide-react";
 import { BsHighlighter } from "react-icons/bs";
@@ -176,13 +176,13 @@ const Tiptap = () => {
               onClick={() => editor.chain().focus().addColumnAfter().run()}
               disabled={!editor.can().addColumnAfter()}
             >
-              Add Column
+              + Column
             </button>
             <button
               onClick={() => editor.chain().focus().addRowAfter().run()}
               disabled={!editor.can().addRowAfter()}
             >
-              Add Row
+              + Row
             </button>
             <button
             className="flex items-center gap-1"
@@ -335,8 +335,8 @@ const Tiptap = () => {
               </div>
             </FloatingMenu>
           )}
-          <div className="h-[45rem] overflow-y-scroll">
-          <EditorContent editor={editor} />
+          <div className="h-auto overflow-y-scroll scrollbar-hide">
+          <EditorContent  editor={editor} />
           </div>
 
           <div className="absolute  left-12 top-34 lg:block hidden">

@@ -14,6 +14,7 @@ import BlogTagTaker from "./BlogTagTaker";
 import TitleUrlTaker from "./TitleUrlTaker";
 import BlogImagetaker from "./BlogImagetaker";
 import BlogMetaDescriptionTaker from "./BlogMetaDescriptionTaker";
+import ImageToUrlParent from "./ImageToUrlParent";
 
 const baseUrl = process.env.BASE_URL;
 
@@ -99,11 +100,13 @@ const BlogEditorTipTap: React.FC = () => {
 
   return (
     <div className="min-h-[100vh] h-auto grid grid-cols-12 text-black">
-      <div className="lg:col-span-3 col-span-12"></div>
+      <div className="lg:col-span-3 col-span-12 py-24">
+        <ImageToUrlParent/>
+      </div>
       <div className="lg:col-span-6 col-span-12 ">
         <Tiptap />
       </div>
-      <div className="lg:col-span-3 col-span-12">
+      <div className="lg:col-span-3 col-span-12 mt-2">
         <div className="p-2">
           <TitleUrlTaker
             title={title}
