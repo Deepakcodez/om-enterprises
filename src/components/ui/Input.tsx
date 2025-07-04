@@ -11,6 +11,7 @@ interface InputProps {
   name?: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 const Input: React.FC<InputProps> = ({
   type = "text",
@@ -21,6 +22,7 @@ const Input: React.FC<InputProps> = ({
   name,
   value,
   onChange,
+  onKeyDown,
 }) => {
   const [showPassword, setShowPassword] = React.useState(false);
   return (

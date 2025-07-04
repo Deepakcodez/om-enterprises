@@ -23,6 +23,13 @@ import { BubbleMenu, FloatingMenu } from "@tiptap/react";
 import CharacterCount from "@tiptap/extension-character-count";
 
 import "../common/blogeditor.css";
+import { FaBold, FaCentercode, FaItalic, FaUnderline } from "react-icons/fa";
+import { AlignCenter, AlignJustify, AlignLeft, AlignRight, Link2, MarsStroke, MoveLeft, Scissors, Table2, Trash } from "lucide-react";
+import { BsHighlighter } from "react-icons/bs";
+import { PiListBullets } from "react-icons/pi";
+import { AiOutlineOrderedList } from "react-icons/ai";
+import { IoCheckbox } from "react-icons/io5";
+import { MdPhoto } from "react-icons/md";
 
 const Tiptap = () => {
   const limit = 1000;
@@ -94,31 +101,31 @@ const Tiptap = () => {
               onClick={() => editor.chain().focus().toggleBold().run()}
               className={editor.isActive("bold") ? "is-active" : ""}
             >
-              Bold
+              <FaBold />
             </button>
             <button
               onClick={() => editor.chain().focus().toggleItalic().run()}
               className={editor.isActive("italic") ? "is-active" : ""}
             >
-              Italic
+              <FaItalic/>
             </button>
             <button
               onClick={() => editor.chain().focus().toggleUnderline().run()}
               className={editor.isActive("underline") ? "is-active" : ""}
             >
-              Underline
+              <FaUnderline />
             </button>
             <button
               onClick={() => editor.chain().focus().toggleStrike().run()}
               className={editor.isActive("strike") ? "is-active" : ""}
             >
-              Strike
+              <Scissors/>
             </button>
             <button
               onClick={() => editor.chain().focus().toggleHighlight().run()}
               className={editor.isActive("highlight") ? "is-active" : ""}
             >
-              Highlight
+              <BsHighlighter/>
             </button>
 
             <select
@@ -139,19 +146,19 @@ const Tiptap = () => {
               onClick={() => editor.chain().focus().toggleBulletList().run()}
               className={editor.isActive("bulletList") ? "is-active" : ""}
             >
-              Bullet List
+            <PiListBullets/>
             </button>
             <button
               onClick={() => editor.chain().focus().toggleOrderedList().run()}
               className={editor.isActive("orderedList") ? "is-active" : ""}
             >
-              Ordered List
+             <AiOutlineOrderedList/>
             </button>
             <button
               onClick={() => editor.chain().focus().toggleTaskList().run()}
               className={editor.isActive("taskList") ? "is-active" : ""}
             >
-              Task List
+             <IoCheckbox/>
             </button>
 
             <button
@@ -163,7 +170,7 @@ const Tiptap = () => {
                   .run()
               }
             >
-              Insert Table
+              <Table2/>
             </button>
             <button
               onClick={() => editor.chain().focus().addColumnAfter().run()}
@@ -178,10 +185,11 @@ const Tiptap = () => {
               Add Row
             </button>
             <button
+            className="flex items-center gap-1"
               onClick={() => editor.chain().focus().deleteTable().run()}
               disabled={!editor.can().deleteTable()}
             >
-              Delete Table
+             <Trash size={15}/> Table
             </button>
 
             <button
@@ -190,7 +198,7 @@ const Tiptap = () => {
                 editor.isActive({ textAlign: "left" }) ? "is-active" : ""
               }
             >
-              Left
+              <AlignLeft/>
             </button>
             <button
               onClick={() =>
@@ -200,7 +208,7 @@ const Tiptap = () => {
                 editor.isActive({ textAlign: "center" }) ? "is-active" : ""
               }
             >
-              Center
+              <AlignCenter/>
             </button>
             <button
               onClick={() => editor.chain().focus().setTextAlign("right").run()}
@@ -208,7 +216,7 @@ const Tiptap = () => {
                 editor.isActive({ textAlign: "right" }) ? "is-active" : ""
               }
             >
-              Right
+              <AlignRight/>
             </button>
             <button
               onClick={() =>
@@ -218,7 +226,7 @@ const Tiptap = () => {
                 editor.isActive({ textAlign: "justify" }) ? "is-active" : ""
               }
             >
-              Justify
+              <AlignJustify/>
             </button>
 
             <button
@@ -229,7 +237,7 @@ const Tiptap = () => {
                 }
               }}
             >
-              Add Image
+              <MdPhoto/>
             </button>
 
             <button
@@ -257,7 +265,7 @@ const Tiptap = () => {
               }}
               className={editor.isActive("link") ? "is-active" : ""}
             >
-              Link
+              <Link2/>
             </button>
 
             <input
@@ -331,7 +339,7 @@ const Tiptap = () => {
           <EditorContent editor={editor} />
           </div>
 
-          <div className="absolute  right-12 top-34">
+          <div className="absolute  left-12 top-34 lg:block hidden">
             <div
               className={`character-count ${
                 editor.storage.characterCount.characters() === limit
