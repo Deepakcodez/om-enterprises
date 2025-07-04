@@ -1,4 +1,6 @@
+"use client"
 import Input from '@/components/ui/Input'
+import { useRouter } from 'next/router';
 import React from 'react'
 
 const TitleUrlTaker = ({
@@ -12,7 +14,18 @@ const TitleUrlTaker = ({
     url: string;
     setUrl: React.Dispatch<React.SetStateAction<string>>;
 }) => {
+
+const [origin, setOrigin] = React.useState('');
+
+  React.useEffect(() => {
+    // This runs only on client side after mount
+    if (typeof window !== 'undefined') {
+      setOrigin(window.location.origin);
+    }
+  }, []);
+  
   return (
+
     <div>
             <Input
               placeholder='Enter title here'
@@ -21,7 +34,7 @@ const TitleUrlTaker = ({
               className='border border-OMblue text-xs font-bold'
             />
             <div className='flex items-center  mt-4 w-full text-xs '>
-              <h1 className=''>{window.location.origin}/blog/</h1>
+              <h1 className=''>{origin}/blog/</h1>
               <div className='flex-1'>
                 <Input
                   placeholder='Enter URL here'

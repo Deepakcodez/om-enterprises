@@ -37,6 +37,7 @@ const Input: React.FC<InputProps> = ({
             name={name}
             value={value}
             onChange={onChange}
+            onKeyDown={onKeyDown}
             placeholder={placeholder}
             className={cn(
               ` outline-none border-gray-800/20 bg-white duration-300  p-3 w-full  rounded-md`,
