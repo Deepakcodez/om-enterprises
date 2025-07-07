@@ -29,6 +29,8 @@ const BlogEditorTipTap: React.FC = () => {
   const [tags, setTags] = useState<string[]>(["general", "blog"]);
   const [tagInput, setTagInput] = useState("");
   const [metaDescription, setMetaDescription] = useState("");
+ const [content, setContent] = useState<string>('');
+
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles && acceptedFiles.length > 0) {
@@ -50,17 +52,22 @@ const BlogEditorTipTap: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    if (!title || !value) return toast.error("Please fill all required fields");
+    console.log("contnet  ",content);
+    if (!title || !content || !url || !metaDescription ) return console.log("Please fill all required fields", title, content, url, metaDescription);
 
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("content", value);
+    formData.append("content", content);
+    formData.append("url", url)
+    formData.append("metaDescription", metaDescription)
+    formData.append("tags", tags.join(","))
+
     if (file) formData.append("image", file);
 
     try {
       setIsPosting(true);
-      const resp = await axios.post(`${baseUrl}/api/v1/blog/create`, formData, {
-        headers: {
+      const resp = await axios.post(`http://localhost:3001/api/v1/blog/create`, formData, {
+        headers: { 
           authorization: getToken(),
           "Content-Type": "multipart/form-data",
         },
@@ -104,7 +111,7 @@ const BlogEditorTipTap: React.FC = () => {
         <ImageToUrlParent/>
       </div>
       <div className="lg:col-span-6 col-span-12 ">
-        <Tiptap />
+        <Tiptap setContent={setContent} />
       </div>
       <div className="lg:col-span-3 col-span-12 mt-2">
         <div className="p-2">

@@ -3,6 +3,7 @@
 import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import Image from 'next/image';
+import { uploadImageAndGetUrl } from '@/services/services';
 
 interface ImageUploadProps {
   onUploadComplete: (url: string) => void;
@@ -15,7 +16,7 @@ const ImageToUrl = ({ onUploadComplete }: ImageUploadProps) => {
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
     setUploadError(null);
-    
+
     // Only accept single file
     if (acceptedFiles.length !== 1) {
       setUploadError('Please upload only one image');
@@ -23,7 +24,7 @@ const ImageToUrl = ({ onUploadComplete }: ImageUploadProps) => {
     }
 
     const file = acceptedFiles[0];
-    
+
     // Check if file is an image
     if (!file.type.startsWith('image/')) {
       setUploadError('Please upload a valid image file');
@@ -37,19 +38,14 @@ const ImageToUrl = ({ onUploadComplete }: ImageUploadProps) => {
     // Here you would typically upload to your backend
     // For now we'll simulate an upload delay and return a mock URL
     setIsUploading(true);
-    
+
     try {
       // Simulate upload delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // In a real implementation, you would:
-      // 1. Upload the file to your backend
-      // 2. Get the URL from the response
-      // 3. Call onUploadComplete with the actual URL
-      
-      // Mock URL for demonstration
-      const mockUrl = `https://example.com/uploads/${file.name}`;
-      onUploadComplete(mockUrl);
+      const formDataToSend = new FormData();
+      formDataToSend.append("image", file)
+      const imageUrl = await uploadImageAndGetUrl(formDataToSend)
+
+      onUploadComplete(imageUrl);
     } catch (error) {
       setUploadError('Upload failed. Please try again.');
       console.error('Upload error:', error);
@@ -79,9 +75,8 @@ const ImageToUrl = ({ onUploadComplete }: ImageUploadProps) => {
     <div className="space-y-4">
       <div
         {...getRootProps()}
-        className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${
-          isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'
-        } ${isUploading ? 'opacity-50 pointer-events-none' : ''}`}
+        className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'
+          } ${isUploading ? 'opacity-50 pointer-events-none' : ''}`}
       >
         <input {...getInputProps()} />
         {isUploading ? (

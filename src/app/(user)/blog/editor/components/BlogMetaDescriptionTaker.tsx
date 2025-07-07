@@ -14,7 +14,9 @@ const BlogMetaDescriptionTaker = ({
       </label>
       <textarea
         id="meta-description"
+        value={metaDescription}
         rows={4}
+        onChange={(e) => setMetaDescription(e.target.value)}
         className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:outline-none  focus:ring-indigo-500"
         placeholder="Enter meta description"
       />

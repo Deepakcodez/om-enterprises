@@ -5,6 +5,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 
+const BASE_URL = process.env.BASE_URL ||"https://api.omenterprisesgroup.in";
 //Token
 const getToken = () => {
   return Cookies.get("token");
@@ -14,7 +15,7 @@ const getToken = () => {
 const fetchTeamMates = async () => {
   try {
     const resp = await axios.get(
-      `${process.env.BASE_URL}/api/v1/admin/employee`
+      `${BASE_URL}/api/v1/admin/employee`
     );
 
     return resp.data.data;
@@ -26,7 +27,7 @@ const fetchTeamMates = async () => {
 const fetchAllJobs = async () => {
   try {
     const response = await axios.get(
-      `${process.env.BASE_URL ||"https://api.omenterprisesgroup.in" }/api/v1/admin/all/jobs`
+      `${BASE_URL}/api/v1/admin/all/jobs`
     );
     console.log(response.data);
     return response.data.jobs;
@@ -38,7 +39,7 @@ const fetchAllJobs = async () => {
 const fetchJobQueries = async () => {
   try {
     const response = await axios.get(
-      `${process.env.BASE_URL}/api/v1/admin/get/job/query`,
+      `${BASE_URL}/api/v1/admin/get/job/query`,
       {
         headers: {
           authorization: getToken()
@@ -56,7 +57,7 @@ const fetchJobQueries = async () => {
 const fetchTransactionalPlans = async () => {
   try {
     const response = await axios.get(
-      `${process.env.BASE_URL}/api/v1/admin/plan/get/transactional`
+      `${BASE_URL}/api/v1/admin/plan/get/transactional`
     );
     return response.data.plans;
   } catch (error) {
@@ -67,7 +68,7 @@ const fetchTransactionalPlans = async () => {
 const fetchPromotionalPlans = async () => {
   try {
     const response = await axios.get(
-      `${process.env.BASE_URL}/api/v1/admin/plan/get/promotional`
+      `${BASE_URL}/api/v1/admin/plan/get/promotional`
     );
     return response.data.plans;
   } catch (error) {
@@ -78,7 +79,7 @@ const fetchPromotionalPlans = async () => {
 const fetchInstantCallBack = async () => {
   try {
     const instantCallbackQueries = await axios.get(
-      `${process.env.BASE_URL}/api/v1/admin/instant/call`,
+      `${BASE_URL}/api/v1/admin/instant/call`,
       {
         headers: {
           authorization: getToken()
@@ -95,7 +96,7 @@ const fetchInstantCallBack = async () => {
 const fetchContactQuery = async () => {
   try {
     const instantContactQueries = await axios.get(
-      `${process.env.BASE_URL}/api/v1/admin/form/contact`,
+      `${BASE_URL}/api/v1/admin/form/contact`,
       {
         headers: {
           authorization: getToken()
@@ -111,7 +112,7 @@ const fetchContactQuery = async () => {
 const fetchNotification = async () => {
   try {
     const instantContactQueries = await axios.get(
-      `${process.env.BASE_URL}/api/v1/admin/notification/all`,
+      `${BASE_URL}/api/v1/admin/notification/all`,
       {
         headers: {
           authorization: getToken()
@@ -128,7 +129,7 @@ const fetchNotification = async () => {
 const fetchAllClients = async () => {
   try {
     const response = await axios.get(
-      `${process.env.BASE_URL}/api/v1/admin/get/client`
+      `${BASE_URL}/api/v1/admin/get/client`
     );
     if(response.data.clients.length === 0){
       return [];
@@ -144,7 +145,7 @@ const fetchAllClients = async () => {
 const fetchBlogByTitle = async (title: string) => {
   try {
     const resp = await axios.get(
-      `${process.env.BASE_URL}/api/v1/blog/title/${title}`
+      `${BASE_URL}/api/v1/blog/title/${title}`
     );
     // setBlog(resp.data.blog);
     return resp.data.blog;
@@ -154,7 +155,7 @@ const fetchBlogByTitle = async (title: string) => {
 };
 const fetchBlogById = async (id: string) => {
   try {
-    const resp = await axios.get(`${process.env.BASE_URL}/api/v1/blog/${id}`);
+    const resp = await axios.get(`${BASE_URL}/api/v1/blog/${id}`);
     // setBlog(resp.data.blog);
     return resp.data.blog;
   } catch {
@@ -164,7 +165,7 @@ const fetchBlogById = async (id: string) => {
 
 const fetchBlogs = async () => {
   try {
-    const res = await axios.get(`${process.env.BASE_URL}/api/v1/blog/all`);
+    const res = await axios.get(`${BASE_URL}/api/v1/blog/all`);
     return res.data.blogs;
   } catch (error) {
     console.log(error);
@@ -173,7 +174,7 @@ const fetchBlogs = async () => {
 //post request
 const addJob = async (data: JobRequirementForm) => {
   try {
-    await axios.post(`${process.env.BASE_URL}/api/v1/admin/create/job`, data, {
+    await axios.post(`${BASE_URL}/api/v1/admin/create/job`, data, {
       headers: {
         authorization: getToken()
       }
@@ -187,7 +188,7 @@ const addJob = async (data: JobRequirementForm) => {
 const instantCallApiCall = async (data:  instantCall) => {
   try {
     const resp = await axios.post(
-      `${process.env.BASE_URL}/api/v1/admin/instant/call`,
+      `${BASE_URL}/api/v1/admin/instant/call`,
       data
     );
     if (resp.statusText == "OK") {
@@ -206,7 +207,7 @@ const handleUpdatePlan = async (
   console.log(id);
   try {
     await axios.put(
-      `${process.env.BASE_URL}/api/v1/admin/plan/update/${id}`,
+      `${BASE_URL}/api/v1/admin/plan/update/${id}`,
       data,
       {
         headers: {
@@ -222,13 +223,28 @@ const handleUpdatePlan = async (
 
 const delelteBlog = async (id: string) => {
   try {
-    await axios.delete(`${process.env.BASE_URL}/api/v1/blog/delete/${id}`, {
+    await axios.delete(`${BASE_URL}/api/v1/blog/delete/${id}`, {
       headers: {
         authorization: getToken()
       }
     });
     toast.success("Blog deleted successfully");
   } catch {
+    toast.error("Something went wrong");
+  }
+};
+
+const uploadImageAndGetUrl = async (file:FormData) => {
+  try {
+    const resp = await axios.post(`http://localhost:3001/api/v1/blog/imgtourl`,file, {
+
+      headers: {
+        authorization: getToken()
+      }
+    });
+    return  resp.data.imageUrl
+  } catch(error) { 
+    console.log(error)
     toast.error("Something went wrong");
   }
 };
@@ -328,5 +344,6 @@ export {
   getClientsQuery,
   getBlogsQuery,
   fetchBlogById,
-  fetchBlogByTitle
+  fetchBlogByTitle,
+  uploadImageAndGetUrl
 };
