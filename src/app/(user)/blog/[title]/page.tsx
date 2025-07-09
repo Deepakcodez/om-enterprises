@@ -8,7 +8,7 @@ type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
     const baseUrl = process.env.BASE_URL;
-const fetchBlogByTitle = async (title: string) => {
+export const fetchBlogByTitle = async (title: string) => {
   try {
     const res = await fetch(`${baseUrl}/api/v1/blog/url/${title}`, {
       next: { revalidate: 60 },

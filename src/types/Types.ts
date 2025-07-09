@@ -38,3 +38,12 @@ export interface BLogType {
     updatedAt: Date;
     __v:       number;
 }
+
+
+export interface CategoryT {
+  _id: string
+  name: string
+  createdAt: string
+  updatedAt: string
+  __v: number
+}

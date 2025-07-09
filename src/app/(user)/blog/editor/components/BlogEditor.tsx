@@ -46,11 +46,13 @@ import { MdPhoto } from 'react-icons/md'
 const lowlight = createLowlight(common)
 
 const Tiptap = ({
+  content = '<h2>Welcome to your editor</h2> <p>Start writing here...</p>',
   setContent
 }: {
+  content?: string
   setContent: React.Dispatch<React.SetStateAction<string>>
 }) => {
-  const limit = 1000
+  const limit = 100000
 
   const FontSize = TextStyle.extend({
     addAttributes () {
@@ -147,10 +149,7 @@ const Tiptap = ({
       }),
       Underline
     ],
-    content: `
-      <h2>Welcome to your editor</h2>
-      <p>Start writing here...</p>
-    `,
+    content: content,
     editorProps: {
       attributes: {
         class:
@@ -491,8 +490,8 @@ const Tiptap = ({
               </div>
             </FloatingMenu>
           )}
-          <div className='h-auto overflow-y-scroll scrollbar-hide'>
-            <EditorContent editor={editor} />
+          <div className='h-auto overflow-y-scroll scrollbar-hide text-black'>
+            <EditorContent editor={editor}  className="tiptap" />
           </div>
 
           <div className='absolute left-12 top-34 lg:block hidden'>

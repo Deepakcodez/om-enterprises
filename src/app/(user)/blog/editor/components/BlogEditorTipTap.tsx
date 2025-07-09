@@ -15,6 +15,7 @@ import TitleUrlTaker from "./TitleUrlTaker";
 import BlogImagetaker from "./BlogImagetaker";
 import BlogMetaDescriptionTaker from "./BlogMetaDescriptionTaker";
 import ImageToUrlParent from "./ImageToUrlParent";
+import BlogCategorySelector from "./BlogCategorySelector";
 
 const baseUrl = process.env.BASE_URL;
 
@@ -30,7 +31,7 @@ const BlogEditorTipTap: React.FC = () => {
   const [tagInput, setTagInput] = useState("");
   const [metaDescription, setMetaDescription] = useState("");
  const [content, setContent] = useState<string>('');
-
+ const [categoryId, setCategoryId] = useState<string>('');
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles && acceptedFiles.length > 0) {
@@ -59,6 +60,7 @@ const BlogEditorTipTap: React.FC = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("url", url)
+    formData.append("categoryId", categoryId)
     formData.append("metaDescription", metaDescription)
     formData.append("tags", tags.join(","))
 
@@ -131,6 +133,9 @@ const BlogEditorTipTap: React.FC = () => {
             handleAddTag={handleAddTag}
             removeTag={removeTag}
           />
+
+          <BlogCategorySelector category={categoryId} setCategory={setCategoryId} />
+
 
           <BlogImagetaker
             getRootProps={getRootProps}

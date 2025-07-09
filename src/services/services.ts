@@ -5,7 +5,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 
-const BASE_URL = process.env.BASE_URL ||"https://api.omenterprisesgroup.in";
+const BASE_URL = process.env.BASE_URL || "https://api.omenterprisesgroup.in";
 //Token
 const getToken = () => {
   return Cookies.get("token");
@@ -131,9 +131,9 @@ const fetchAllClients = async () => {
     const response = await axios.get(
       `${BASE_URL}/api/v1/admin/get/client`
     );
-    if(response.data.clients.length === 0){
+    if (response.data.clients.length === 0) {
       return [];
-    }else{
+    } else {
       return response.data.clients;
     }
   } catch (error) {
@@ -185,7 +185,7 @@ const addJob = async (data: JobRequirementForm) => {
   // Add logic to submit the form data (e.g., API call)
 };
 
-const instantCallApiCall = async (data:  instantCall) => {
+const instantCallApiCall = async (data: instantCall) => {
   try {
     const resp = await axios.post(
       `${BASE_URL}/api/v1/admin/instant/call`,
@@ -234,20 +234,56 @@ const delelteBlog = async (id: string) => {
   }
 };
 
-const uploadImageAndGetUrl = async (file:FormData) => {
+const uploadImageAndGetUrl = async (file: FormData) => {
   try {
-    const resp = await axios.post(`http://localhost:3001/api/v1/blog/imgtourl`,file, {
+    const resp = await axios.post(`http://localhost:3001/api/v1/blog/imgtourl`, file, {
 
       headers: {
         authorization: getToken()
       }
     });
-    return  resp.data.imageUrl
-  } catch(error) { 
+    return resp.data.imageUrl
+  } catch (error) {
     console.log(error)
     toast.error("Something went wrong");
   }
 };
+
+const handleCreateCategory = async (categoryName: string) => {
+  if (categoryName === "") {
+    toast.error("Category Name is required")
+    return
+  }
+ try {
+   const resp = await axios.post(`http://localhost:3001/api/v1/blog/create/category`, { name: categoryName }, {
+ 
+     headers: {
+       authorization: getToken()
+     }
+   })
+   toast.success("category created")
+ } catch  {
+   toast.error("Something went wrong");
+ }
+
+}
+
+
+const fetchCategory = async () => {
+  try {
+    const resp = await axios.get(`http://localhost:3001/api/v1/blog/categories`, {
+      headers: {
+        authorization: getToken()
+      }
+    })
+    console.log(resp);
+    
+    return resp.data.categories 
+  } catch (error) {
+    toast.error("Something went wrong");
+    return []
+  }
+}
 
 //tansstack get queries
 
@@ -327,6 +363,13 @@ const getBlogsQuery = () => {
     staleTime: 1000 * 60 * 5 // 5 minutes
   });
 };
+const getBlogsCategory = () => {
+  return queryOptions({
+    queryKey: ["blogsCategory"],
+    queryFn: fetchCategory,
+    staleTime: 1000 * 60 * 5 // 5 minutes
+  });
+};
 
 export {
   addJob,
@@ -345,5 +388,7 @@ export {
   getBlogsQuery,
   fetchBlogById,
   fetchBlogByTitle,
-  uploadImageAndGetUrl
+  uploadImageAndGetUrl,
+  handleCreateCategory,
+  getBlogsCategory,
 };

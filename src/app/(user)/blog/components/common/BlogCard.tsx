@@ -11,18 +11,18 @@ import React from 'react'
 const BlogCard = ({ blog }: { blog: BLogType }) => {
   return (
     <Navigator to={blog.url?   `/blog/${blog?.url}` :  `/blog/${slugify(blog?.title)}`}>
-      <div className='flex flex-col gap-2 bg-purple-50 p-4 rounded-2xl'>
+      <div className='flex flex-col gap-2 bg-purple-50 md:p-4 p-2 md:rounded-2xl rounded-md h-full w-full '>
         <Image
           src={blog?.image || '../../../../../assets/images/blogbanner.png'}
           alt={blog?.title || 'Blog Image'}
-          height={200}
-          width={200}
-          className='w-full aspect-video rounded-2xl '
+          height={500}
+          width={500}
+          className='w-full aspect-video md:rounded-2xl rounded-md '
         />
         <div>
           {/* titles */}
           <div>
-            <h1 className='text-black  text-lg text-ellipsis line-clamp-1'>
+            <h1 className='text-black  md:text-lg text-sm text-ellipsis line-clamp-1'>
               {blog?.title}
             </h1>
             <div className='flex  items-center justify-end gap-2 text-gray-500'>

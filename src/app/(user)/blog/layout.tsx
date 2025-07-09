@@ -6,7 +6,7 @@ const BlogLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <WideScreenHandler>
       <XpaddingWrapper>
-        <div className=" h-auto w-full overflow-hidden">{children}</div>
+        <div className="w-full ">{children}</div>
       </XpaddingWrapper>
     </WideScreenHandler>
   );

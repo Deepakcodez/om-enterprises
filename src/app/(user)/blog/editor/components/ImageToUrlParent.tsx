@@ -4,6 +4,7 @@ import { useState } from "react";
 import ImageToUrl from "./ImageToUrl";
 import toast from "react-hot-toast";
 import { motion } from "motion/react";
+import CreateCategory from "./CreateCategory";
 
 export default function ImageToUrlParent() {
   const [isCopied, setIsCopied] = useState(false);
@@ -47,6 +48,9 @@ export default function ImageToUrlParent() {
           <p className="text-sm break-all">{imageUrl}</p>
         </motion.div>
       )}
+      
+      <CreateCategory/>
+
     </div>
   );
 }

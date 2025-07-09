@@ -1,9 +1,9 @@
 import { BLogType } from '@/types/Types'
-import { EditorContent } from '@tiptap/react'
 import { Clock } from 'lucide-react'
 import moment from 'moment'
 import Image from 'next/image'
 import React from 'react'
+import "./blogeditor.css"
 
 const Blog = ({ blog }: { blog: BLogType }) => {
   return (
@@ -34,3 +34,4 @@ const Blog = ({ blog }: { blog: BLogType }) => {
 }
 
 export default Blog
+
