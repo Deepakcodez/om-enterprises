@@ -14,7 +14,7 @@ const cousine = Cousine({
 const Blog = ({ blog }: { blog: BLogType }) => {
   return (
     <div className="flex flex-col gap-4  bg-violet-5 rounded-2xl lg:p-12">
-      <Image
+        <Image
         src={blog?.image || "/career.jpeg"}
         alt={blog?.title || "Blog Image"}
         height={1200}

@@ -112,7 +112,7 @@ const BlogEditorTipTap: React.FC = () => {
       <div className="lg:col-span-3 col-span-12 py-24">
         <ImageToUrlParent/>
       </div>
-      <div className="lg:col-span-6 col-span-12 ">
+      <div className="lg:col-span-6 col-span-12 text-black">
         <Tiptap setContent={setContent} />
       </div>
       <div className="lg:col-span-3 col-span-12 mt-2">
