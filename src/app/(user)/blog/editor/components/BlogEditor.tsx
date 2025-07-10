@@ -258,9 +258,9 @@ const Tiptap = ({
               <option value=''>Size</option>
               <option value='12px'>Small</option>
               <option value='16px'>Normal</option>
-              <option value='30px'>Large</option>
-              <option value='44px'>XL</option>
-              <option value='52px'>XXL</option>
+              <option value='24px'>Large</option>
+              <option value='34px'>XL</option>
+              <option value='42px'>XXL</option>
             </select>
 
             <button
