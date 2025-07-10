@@ -46,7 +46,7 @@ import { MdPhoto } from 'react-icons/md'
 const lowlight = createLowlight(common)
 
 const Tiptap = ({
-  content = '<h2>Welcome to your editor</h2> <p>Start writing here...</p>',
+  content = '<h2 style="color: black;">Welcome to your editor</h2> <p>Start writing here...</p>',
   setContent
 }: {
   content?: string

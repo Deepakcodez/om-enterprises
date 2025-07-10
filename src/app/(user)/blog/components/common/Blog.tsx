@@ -1,13 +1,20 @@
 import { BLogType } from '@/types/Types'
-import { Clock } from 'lucide-react'
+import { Clock, Pen } from 'lucide-react'
 import moment from 'moment'
 import Image from 'next/image'
 import React from 'react'
 import "./blogeditor.css"
+import { redirect } from 'next/navigation'
 
 const Blog = ({ blog }: { blog: BLogType }) => {
   return (
     <div className='flex flex-col gap-4  bg-violet-5 rounded-2xl lg:p-12'>
+      {
+        blog.title &&
+      <button    className='absolute top-44 right-4 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors'>
+        <Pen color='black'/>
+      </button> 
+      }
       <Image
         src={blog?.image || '/career.jpeg'}
         alt={blog?.title || 'Blog Image'}

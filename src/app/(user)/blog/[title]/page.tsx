@@ -2,6 +2,7 @@ import React from "react";
 import Blog from "../components/common/Blog";
 
 import { Metadata, ResolvingMetadata } from "next";
+import TableOfContents from "./components/TableOfContent";
 
 type Props = {
   params: Promise<{ title: string }>;
@@ -86,7 +87,7 @@ const SingleBlogPage = async ({ params }: { params: Promise<{ title: string }> }
           <Blog blog={data.blog} />
         </div>
         <div className="lg:col-span-3 hidden lg:flex">
-          {/* <Checkpoints /> */}
+         {/* <TableOfContents/> */}
         </div>
       </div>
     );
