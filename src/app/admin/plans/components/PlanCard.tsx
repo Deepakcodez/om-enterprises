@@ -1,3 +1,4 @@
+"use client";
 import Modal from "@/components/functionality/Modal";
 import useCookies from "@/hooks/useCookies";
 import axios from "axios";
@@ -33,7 +34,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
     try {
       setIsDeleting(true);
       await axios.delete(
-        `${process.env.BASE_URL}/api/v1/admin/plan/delete/${id}`,
+        `${process.env.NEXT_PUBLICBASE_URL}/api/v1/admin/plan/delete/${id}`,
         {
           headers: {
             authorization: token

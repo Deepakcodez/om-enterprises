@@ -5,7 +5,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 
-const BASE_URL = process.env.BASE_URL || "https://api.omenterprisesgroup.in";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ;
 //Token
 const getToken = () => {
   return Cookies.get("token");

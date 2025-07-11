@@ -1,11 +1,12 @@
 "use client"
 import React, { useState } from "react";
-import logo from "../../../assets/logo.png";
+import logo from "../../../../assets/logo.png";
 import axios from "axios";
 import toast from "react-hot-toast";
 import useCookies from "@/hooks/useCookies";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+// import { baseurl } from "@/utills/constant";
 
 const AdminLogin: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -13,11 +14,12 @@ const AdminLogin: React.FC = () => {
   const [password, setPassword] = useState("");
   const navigate = useRouter();
   const { setToken } = useCookies();
+  const baseurl = process.env.NEXT_PUBLIC_BASE_URL;
 
   const loginHandler = async () => {
     try {
       const resp = await axios.post(
-        `${process.env.BASE_URL}/api/v1/admin/login`,
+        `${baseurl}/api/v1/admin/login`,
         { email, password }
       );
   
@@ -55,9 +57,9 @@ const AdminLogin: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-black">
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <Image src={logo} alt="Logo" className="h-12  mx-auto" />
+        <Image quality={100} src={logo} alt="Logo" className=" h-24 w-auto  mx-auto" />
         <h2 className="text-2xl text-gray-900/50 font-bold mb-6 text-center">
           Login
         </h2>

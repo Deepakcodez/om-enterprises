@@ -10,7 +10,7 @@ const useBlogger = () => {
   const validateBlogger = async () => {
     try {
       const resp = await axios.get(
-        `${process.env.BASE_URL}/api/v1/admin/validate`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/admin/validate`,
         {
           headers: {
             Authorization: `${token}`

@@ -1,9 +1,9 @@
-import Plans from "../dashboard/components/Plans";
+import Plan from "./components/Plan";
 
 export default function AccountPage() {
     return (
         <main>
-            <Plans />
+            <Plan />
         </main>
     )
 }

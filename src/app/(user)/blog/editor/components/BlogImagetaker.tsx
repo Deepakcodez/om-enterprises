@@ -58,6 +58,7 @@
 
 
 "use client"
+import Image from 'next/image';
 import React from 'react'
 
 const BlogImagetaker = ({
@@ -106,10 +107,12 @@ const BlogImagetaker = ({
 
       {file && (
         <div className='mt-4 relative flex flex-col items-center'>
-          <img
-            src={getImageUrl()}
+          <Image
+            src={getImageUrl() || "../../../../../../public//career.jpeg"}
             className='h-40 w-auto rounded-lg object-cover'
             alt='Upload preview'
+            height={600}
+            width={600}
           />
           <button
             onClick={removeImage}

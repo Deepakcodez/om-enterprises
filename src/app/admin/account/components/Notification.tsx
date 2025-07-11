@@ -8,7 +8,7 @@ const Notification: React.FC = () => {
         queryOptions(getNotificationQuery())
     );
     return (
-        <div className="w-full h-full  rounded-xl">
+        <div className="w-full h-full  rounded-xl ">
             <div className="p-4  border-b border-gray-800/10">
                 <h1 className="text-xl  font-semibold text-blue-950/40">
                     Notifications{" "}

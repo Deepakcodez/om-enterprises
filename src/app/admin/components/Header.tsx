@@ -20,7 +20,7 @@ const Header: React.FC = () => {
         <div className="flex items-center gap-6">
           {/* bell icon */}
           <div onClick={()=>setShowNotification(!showNotification)} className="relative  ">
-            <Image src={Bell} alt="Bell" className="h-5" width={10} height={10} />
+            <Image src={Bell} alt="Bell" className="h-auto w-auto" width={100} height={100} />
           </div>
 
           {/* profile */}

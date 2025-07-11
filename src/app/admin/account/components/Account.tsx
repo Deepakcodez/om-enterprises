@@ -66,7 +66,7 @@ const Account: React.FC = () => {
         </motion.div>
 
         <div className="grid grid-rows-1 gap-12 rounded-xl  ">
-          <div className="w-full h-[80vh] bg-gray-200 rounded-2xl overflow-y-scroll">
+          <div className="w-full h-[80vh] bg-gray-200 rounded-2xl overflow-y-scroll scrollbar-hide">
             <Notification />
           </div>
         </div>

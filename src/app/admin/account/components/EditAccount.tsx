@@ -28,7 +28,7 @@ const EditAccount: React.FC = () => {
   const changeAdminDetails = async () => {
    try {
      const resp = await axios.put(
-       `${process.env.BASE_URL}/api/v1/admin/update/details`,
+       `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/admin/update/details`,
        user,
        {
          headers: {

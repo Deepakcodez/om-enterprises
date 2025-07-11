@@ -6,6 +6,7 @@ import React from 'react'
 import './blogeditor.css'
 import { Open_Sans } from 'next/font/google'
 import Navigator from '@/utills/Navigator'
+import EditButton from '../../[title]/components/EditButton'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
@@ -15,15 +16,7 @@ const openSans = Open_Sans({
 const Blog = ({ blog }: { blog: BLogType }) => {
   return (
     <div className='flex flex-col gap-4  bg-violet-5 rounded-2xl lg:p-12'>
-       {
-        blog?.title && (
-          <Navigator to={`/blog/editor/${blog?.url}`}>
-          <div className='absolute right-12 top-42 border p-2 rounded-full text-3xl font-bold text-black lg:text-4xl text-center'>
-            <Pen/>
-          </div>
-          </Navigator>
-        )
-       }
+      {blog && <EditButton title={blog?.title} />}
       <Image
         src={blog?.image || '/career.jpeg'}
         alt={blog?.title || 'Blog Image'}

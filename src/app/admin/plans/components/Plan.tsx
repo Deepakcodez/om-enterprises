@@ -1,4 +1,4 @@
-
+"use client";
 import React, { useState } from "react";
 import AddPlanForm from "./AddPlanForm";
 import PlanList from "./PlanList";

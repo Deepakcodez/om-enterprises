@@ -29,8 +29,9 @@ const Team: React.FC = () => {
   const allTeammates = async () => {
     try {
       const response = await axios.get(
-        `${process.env.BASE_URL}/api/v1/admin/employee`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/admin/employee`
       );
+
       setTeammates(response.data.data);
     } catch (error) {
       toast.error("Failed to fetch Team mates");
@@ -97,6 +98,8 @@ const Team: React.FC = () => {
             <Image
               src={emp?.image}
               alt="face"
+              width={100}
+              height={100}
               className="w-[12rem] aspect-square object-cover rounded-lg bg-gray-500/20"
             />
             <div className="h-[12rem] w-full justify-content-start px-6">

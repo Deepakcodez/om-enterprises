@@ -1,3 +1,4 @@
+"use client";
 import Button from "@/components/ui/Button";
 import useCookies from "@/hooks/useCookies";
 import axios from "axios";

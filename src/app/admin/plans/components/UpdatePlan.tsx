@@ -1,4 +1,4 @@
-
+"use client";
 import Button from "@/components/ui/Button";
 import { handleUpdatePlan } from "@/services/services";
 import { UpdatePlanProps } from "@/types/Types";

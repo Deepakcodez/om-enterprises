@@ -3,8 +3,11 @@ import Loading from './loading'
 import ErrorBoundary from '@/utills/ErrorBoundary'
 import AllBlogWithPagination from './components/allBlog.tsx/AllBlogWithPagination'
 import BannerBlog from './components/common/BannerBlog'
+import { Pen } from 'lucide-react'
+import Navigator from '@/utills/Navigator'
+import EditButton from './[title]/components/EditButton'
 
-async function getBlogs() {
+async function getBlogs () {
   try {
     const res = await fetch(`${process.env.BASE_URL}/api/v1/blog/all`, {
       next: { revalidate: 3600 }
@@ -18,20 +21,33 @@ async function getBlogs() {
   }
 }
 
-export default async function BlogPage() {
+export default async function BlogPage () {
   const { blogs } = await getBlogs()
 
   return (
     <>
       <div className=' flex w-full mx-auto md:max-w-7xl my-12'>
-        <ErrorBoundary fallback={<div className='text-red-500'>Something went wrong while loading the blog.</div>}>
+        <EditButton title={"/blog/editor"} />
+        <ErrorBoundary
+          fallback={
+            <div className='text-red-500'>
+              Something went wrong while loading the blog.
+            </div>
+          }
+        >
           <Suspense fallback={<Loading />}>
             <BannerBlog blog={blogs.toReversed()[0]} />
           </Suspense>
         </ErrorBoundary>
       </div>
       <div className='w-full'>
-        <ErrorBoundary fallback={<div className='text-red-500'>Something went wrong while loading the blog.</div>}>
+        <ErrorBoundary
+          fallback={
+            <div className='text-red-500'>
+              Something went wrong while loading the blog.
+            </div>
+          }
+        >
           <Suspense fallback={<Loading />}>
             <AllBlogWithPagination />
           </Suspense>

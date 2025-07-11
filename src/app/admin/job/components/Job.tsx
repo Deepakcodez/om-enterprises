@@ -21,7 +21,7 @@ const Job: React.FC = () => {
           <motion.div whileTap={{ scale: 0.5, rotate: 720 }}>
             {!isSectionA && <RefreshCcw onClick={() => setRefresh(!refresh)} />}
           </motion.div>
-          <div onClick={() => router.push("/admin/applied-jobs")} className=" ">
+          <div onClick={() => router.push("/admin/job/applied")} className=" ">
             <BriefcaseBusiness />
           </div>
         </div>
