@@ -37,8 +37,7 @@ const BlogEditorTipTap = ({ slug }: { slug: string }) => {
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
-  const [file, setFile] = useState<File | null>(null);
-  const navigate = useRouter();
+  const [file, setFile] = useState<File | string | null>(null);
   const queryClient = useQueryClient();
   const [tags, setTags] = useState<string[]>(["general", "blog"]);
   const [tagInput, setTagInput] = useState("");
@@ -96,6 +95,7 @@ for (const [key, value] of formData.entries()) {
       {
         headers: {
           'Authorization': getToken(),
+           'Content-Type': 'multipart/form-data'
         }
       }
     );
@@ -119,9 +119,10 @@ for (const [key, value] of formData.entries()) {
     setTitle(resp.blog.title || "");
     setUrl(resp.blog.url || "");
     setMetaDescription(resp.blog.metaDescription || "");
-    setCategoryId(resp.blog.categoryId || "");
+    setCategoryId(resp.blog.category || "");
     setTags(resp.blog.tags || []);
-    // setFile(resp.blog.image || null)
+    setFile(resp.blog.image || null)
+    console.log(resp.blog.image)
   };
 
   React.useEffect(() => {
@@ -187,10 +188,7 @@ for (const [key, value] of formData.entries()) {
             removeImage={removeImage}
           />
 
-          {/* <div className="mt-2"> */}
-          {/* <Tiptap value={value} onChange={setValue} /> */}
-          {/* <Tiptap /> */}
-          {/* </div> */}
+ 
           <BlogMetaDescriptionTaker
             metaDescription={metaDescription}
             setMetaDescription={setMetaDescription}
