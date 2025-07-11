@@ -3,8 +3,6 @@ import Loading from './loading'
 import ErrorBoundary from '@/utills/ErrorBoundary'
 import AllBlogWithPagination from './components/allBlog.tsx/AllBlogWithPagination'
 import BannerBlog from './components/common/BannerBlog'
-import { Pen } from 'lucide-react'
-import Navigator from '@/utills/Navigator'
 import EditButton from './[title]/components/EditButton'
 
 async function getBlogs () {

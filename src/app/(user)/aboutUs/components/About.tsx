@@ -2,10 +2,19 @@
 import React from "react";
 import AboutHero from "./AboutHero";
 import shape from "../../../../assets/images/shape1.png"
-import Head from "next/head"; // Use Next.js Head instead
+import Head from "next/head";
 import WideScreenHandler from "@/components/WideScreenHandler";
+import { getAllBlogs } from "@/services/services";
 
 const AboutUs: React.FC = () => {
+  const fetch = async()=>{
+   const data =  await getAllBlogs();
+
+  }
+
+  React.useEffect(()=>{
+    fetch()
+  },[])
   return (
     <div className="">
       <Head>

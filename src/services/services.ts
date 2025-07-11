@@ -285,6 +285,21 @@ const fetchCategory = async () => {
   }
 }
 
+
+
+async function getAllBlogs () {
+  try {
+
+     const resp = await axios.get(`${BASE_URL}/api/v1/blog/all`) 
+     console.log(resp)
+    return resp.data.blogs 
+  } catch (error) {
+    console.error(error)
+    return { blogs: [] }
+  }
+}
+
+
 //tansstack get queries
 
 const getTeamMates = () => {
@@ -371,6 +386,8 @@ const getBlogsCategory = () => {
   });
 };
 
+
+
 export {
   addJob,
   getTeamMates,
@@ -391,4 +408,5 @@ export {
   uploadImageAndGetUrl,
   handleCreateCategory,
   getBlogsCategory,
+  getAllBlogs,
 };
