@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import BlogCard from '../common/BlogCard'
 import PaginationControls from './PaginationController'
 import { BLogType } from '@/types/Types'
+import AllblogSkelton from './AllblogSkelton'
 
 const AllBlogWithPagination = () => {
     const searchParams = useSearchParams()
@@ -13,11 +14,13 @@ const AllBlogWithPagination = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
     const [totalBlogs, setTotalBlogs] = useState(0)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         async function fetchBlogs() {
             try {
-                const res = await fetch(`http://localhost:3001/api/v1/blog/withpagination?page=${page}&limit=12`)
+                setIsLoading(true)
+                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blog/withpagination?page=${page}&limit=12`)
 
                 const data = await res.json()
                 setBlogs(data.blogs)
@@ -26,11 +29,19 @@ const AllBlogWithPagination = () => {
                 setTotalBlogs(data.totalBlogs)
             } catch (error) {
                 console.error(error)
+            } finally {
+                setIsLoading(false)
             }
         }
 
         fetchBlogs()
     }, [page])
+
+    if (isLoading) {
+        return (
+            <AllblogSkelton/>
+        )
+    }
 
     return (
         <div className='h-full w-full flex flex-col flex-justify-start items-center my-12'>

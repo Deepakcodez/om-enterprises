@@ -1,10 +1,9 @@
 "use client"
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { FileUploader } from "react-drag-drop-files";
+import { useDropzone } from "react-dropzone";
 import useCookies from "@/hooks/useCookies";
-
 import { Client } from "./Clients";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -15,7 +14,6 @@ interface UpdateClientProps {
 }
 
 const UpdateClient: React.FC<UpdateClientProps> = ({ setOpen, client }) => {
-  const fileTypes = ["PNG"];
   const { getToken } = useCookies();
   const token = getToken();
   const router = useRouter();
@@ -28,7 +26,28 @@ const UpdateClient: React.FC<UpdateClientProps> = ({ setOpen, client }) => {
   const [file, setFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Handle Input Change
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    const acceptedFile = acceptedFiles[0];
+    if (!acceptedFile) return;
+    
+    // Validate PNG file
+    if (!acceptedFile.type.match('image/png')) {
+      toast.error("Only PNG images are allowed");
+      return;
+    }
+    
+    setFile(acceptedFile);
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      'image/png': ['.png']
+    },
+    maxFiles: 1,
+    maxSize: 5 * 1024 * 1024 // 5MB
+  });
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
@@ -37,12 +56,6 @@ const UpdateClient: React.FC<UpdateClientProps> = ({ setOpen, client }) => {
     });
   };
 
-  // Handle File Change
-  const handleFileChange = (file: File) => {
-    setFile(file);
-  };
-
-  // Form Validation
   const validateForm = () => {
     const { name, comment, rating } = formData;
 
@@ -59,12 +72,14 @@ const UpdateClient: React.FC<UpdateClientProps> = ({ setOpen, client }) => {
     return true;
   };
 
-  // Handle Form Submission
   const handleSubmit = async (e: React.FormEvent) => {
     setIsLoading(true);
     e.preventDefault();
 
-    if (!validateForm()) return;
+    if (!validateForm()) {
+      setIsLoading(false);
+      return;
+    }
 
     try {
       const formDataToSend = new FormData();
@@ -75,15 +90,13 @@ const UpdateClient: React.FC<UpdateClientProps> = ({ setOpen, client }) => {
         formDataToSend.append("image", file);
       }
 
-      console.log("form to send", client, token);
       const response = await axios.put(
-        `${process.env.BASE_URL}/api/v1/admin/update/client/${
-          client?._id
-        }`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/admin/update/client/${client?._id}`,
         formDataToSend,
         {
           headers: {
-            authorization: `${token}`
+            authorization: `${token}`,
+            "Content-Type": "multipart/form-data",
           }
         }
       );
@@ -92,10 +105,7 @@ const UpdateClient: React.FC<UpdateClientProps> = ({ setOpen, client }) => {
         setIsLoading(false);
         toast.success("Client updated successfully!");
         setOpen(false);
-        router.push("/admin/clients"); // Redirect after update
-      } else {
-        toast.error("Failed to update client");
-        setIsLoading(false);
+        router.push("/admin/clients");
       }
     } catch (error) {
       setIsLoading(false);
@@ -123,24 +133,44 @@ const UpdateClient: React.FC<UpdateClientProps> = ({ setOpen, client }) => {
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label
-              htmlFor="image"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Logo (png 100*100)
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Logo (PNG 100×100)
             </label>
-            <FileUploader
-              multiple={false}
-              handleChange={handleFileChange}
-              name="file"
-              types={fileTypes}
-            />
-            {formData.logo && (
-              <Image
-                src={formData.logo}
-                alt="Current Logo"
-                className="mt-2 h-20 w-20 object-cover rounded-md"
-              />
+            <div
+              {...getRootProps()}
+              className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer ${
+                isDragActive ? "border-blue-500 bg-blue-50" : "border-gray-300"
+              }`}
+            >
+              <input {...getInputProps()} />
+              {file ? (
+                <p className="text-green-600">{file.name}</p>
+              ) : isDragActive ? (
+                <p className="text-blue-500">Drop the PNG file here...</p>
+              ) : (
+                <p>Drag & drop a PNG file here, or click to select</p>
+              )}
+            </div>
+            {formData.logo && !file && (
+              <div className="mt-4">
+                <p className="text-sm text-gray-500 mb-2">Current Logo:</p>
+                <Image
+                  src={formData.logo}
+                  alt="Current Logo"
+                  height={100}
+                  width={100}
+                  className="h-20 w-20 object-cover rounded-md"
+                />
+              </div>
+            )}
+            {file && (
+              <button
+                type="button"
+                onClick={() => setFile(null)}
+                className="mt-2 text-sm text-red-500 hover:text-red-700"
+              >
+                Remove file
+              </button>
             )}
           </div>
 
@@ -185,12 +215,14 @@ const UpdateClient: React.FC<UpdateClientProps> = ({ setOpen, client }) => {
               htmlFor="rating"
               className="block text-sm font-medium text-gray-700"
             >
-              Rating
+              Rating (1-5)
             </label>
             <input
               type="number"
               id="rating"
               name="rating"
+              min="1"
+              max="5"
               value={formData.rating}
               onChange={handleChange}
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-OMblue text-black"
@@ -200,7 +232,10 @@ const UpdateClient: React.FC<UpdateClientProps> = ({ setOpen, client }) => {
 
           <button
             type="submit"
-            className="w-full bg-OMblue text-white py-2 rounded-lg hover:bg-OMblue/80 transition duration-300"
+            disabled={isLoading}
+            className={`w-full bg-OMblue text-white py-2 rounded-lg hover:bg-OMblue/80 transition duration-300 ${
+              isLoading ? "opacity-70 cursor-not-allowed" : ""
+            }`}
           >
             {isLoading ? "Updating..." : "Update Client"}
           </button>

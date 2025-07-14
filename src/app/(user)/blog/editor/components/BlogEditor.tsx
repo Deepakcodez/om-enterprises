@@ -46,7 +46,7 @@ import { MdPhoto } from 'react-icons/md'
 const lowlight = createLowlight(common)
 
 const Tiptap = ({
-  content = '<h2 style="color: black;">Welcome to your editor</h2> <p>Start writing here...</p>',
+  content = '',
   setContent
 }: {
   content?: string
@@ -490,7 +490,7 @@ const Tiptap = ({
               </div>
             </FloatingMenu>
           )}
-          <div className='h-auto overflow-y-scroll scrollbar-hide text-black'>
+          <div className='h-[45rem] overflow-y-scroll scrollbar-hide text-black'>
             <EditorContent editor={editor}  className="tiptap" />
           </div>
 

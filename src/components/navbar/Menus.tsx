@@ -9,7 +9,7 @@ export const menus = [
     link: "/services",
     submenu: [
       {
-        name: "Messaging",
+        name: "SMS Marketing",
         link: "/services/messaging/a2p-messaging",
         submenu: [
           { name: "A2P Messaging", link: "/services/messaging/a2p-messaging" },

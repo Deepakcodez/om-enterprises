@@ -80,7 +80,7 @@ const Sidebar = () => {
           <Image
             src={logo}
             alt="LOGO"
-            className="h-24 w-auto"
+            className="h-12 w-auto"
             width={100}
             height={100}
           />

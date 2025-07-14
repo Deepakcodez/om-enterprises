@@ -29,7 +29,7 @@ const AdminLogin: React.FC = () => {
         if (role === "admin") {
           navigate.push("/admin/dashboard");
         } else if (role === "blogger") {
-          navigate.push("/blogs/editor");
+          navigate.push("/blog");
         } else {
           toast.error("You do not have access.");
         }

@@ -3,6 +3,7 @@ import Blog from '../components/common/Blog'
 
 import { Metadata, ResolvingMetadata } from 'next'
 import TableOfContents from './components/TableOfContent'
+import BlogSkelton from './components/BlogSkelton'
 
 type Props = {
   params: Promise<{ title: string }>
@@ -54,7 +55,7 @@ export async function generateMetadata (
           data.blog.metaDescription ||
           data.blog.excerpt ||
           'OM Enterprises blog post',
-        url: `/blog/${title}`,
+        url: `/blog/${data.blog.url}`,
         images: [blogImage, ...previousImages],
         type: 'article',
         publishedTime: data.blog.createdAt,
@@ -100,7 +101,7 @@ const SingleBlogPage = async ({
           {/* <Sidebar /> */}
         </div>
         <div className='lg:col-span-6 col-span-12'>
-          <Blog blog={data.blog} />
+          {data?.blog ? <Blog blog={data.blog} /> : <BlogSkelton />}
         </div>
         <div className='lg:col-span-3 hidden lg:flex'>
           {/* <TableOfContents/> */}

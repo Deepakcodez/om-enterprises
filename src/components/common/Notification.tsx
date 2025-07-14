@@ -15,7 +15,7 @@ const Notification: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className=" absolute  z-[52] inset-0 backdrop-blur-sm bg-white/20 overflow-hidden">
+    <div className=" absolute  z-[52] inset-0 backdrop-blur-xs bg-white/5 overflow-hidden">
       <RxCross2
         size={25}
         className="float-right m-12"
@@ -25,7 +25,7 @@ const Notification: React.FC = () => {
         initial={{ height: 0 }}
         animate={{ height: "90vh", transition: { duration: 0.2 } }}
         exit={{ height: 0 }}
-        className=" absolute w-[28rem] right-44 bg-neutral-200 p-4 flex flex-col  gap-3 top-12  rounded-lg overflow-y-auto  "
+        className=" absolute w-[28rem] right-44 bg-neutral-200 p-4 flex flex-col  gap-3 top-12  rounded-lg overflow-y-auto  scrollbar-hide "
       >
         {isPending && (
           <div className="flex justify-center items-center h-full">

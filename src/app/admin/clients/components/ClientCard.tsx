@@ -46,6 +46,8 @@ const ClientCard: React.FC<ClientCardProps> = ({
               <Image
                 src={client.img}
                 alt={client.companyName}
+                height={400}
+                width={400}
                 className="h-full aspect-square object-cover"
               />
             </div>

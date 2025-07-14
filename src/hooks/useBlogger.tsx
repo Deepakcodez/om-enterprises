@@ -1,9 +1,11 @@
+"use client";
 import axios from "axios";
 import React from "react";
 import useCookies from "./useCookies";
 
 const useBlogger = () => {
-  const [isBlogger, setIsBlogger] = React.useState<boolean>(false);
+  const [isBlogger, setIsBlogger] = React.useState<boolean | undefined>(undefined);
+  const [loading, setLoading] = React.useState(true);
   const { getToken } = useCookies();
   const token = getToken();
 
@@ -17,23 +19,24 @@ const useBlogger = () => {
           }
         }
       );
-      console.log(resp.data.user.role);
-      // ✅ Check for "blogger" role
-      if (resp.data.user?.role === "blogger" || resp.data.user?.role === "admin") {
+      const role = resp.data?.user?.role;
+      if (role === "blogger" || role === "admin") {
         setIsBlogger(true);
       } else {
         setIsBlogger(false);
       }
-    } catch  {
+    } catch (error) {
       setIsBlogger(false);
+    } finally {
+      setLoading(false);
     }
   };
 
   React.useEffect(() => {
     validateBlogger();
-  });
+  }, []);
 
-  return { isBlogger };
+  return { isBlogger, loading };
 };
 
 export default useBlogger;

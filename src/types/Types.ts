@@ -32,7 +32,8 @@ export interface BLogType {
   title: string
   content: string
   url: string
-  category: string
+  tags : string[]
+  category: CategoryT
   metaDescription: string
   metaTitle: string
   date: string

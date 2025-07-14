@@ -21,7 +21,7 @@ const RemoveClient: React.FC<RemoveClientProps> = ({ client, setOpen }) => {
     setLoading(true);
     try {
       const response = await axios.delete(
-        `${process.env.BASE_URL}/api/v1/admin/delete/client/${
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/admin/delete/client/${
           client?._id
         }`,
         {

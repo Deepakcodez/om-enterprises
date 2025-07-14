@@ -68,7 +68,7 @@ const BlogEditorTipTap: React.FC = () => {
 
     try {
       setIsPosting(true);
-      const resp = await axios.post(`http://localhost:3001/api/v1/blog/create`, formData, {
+      const resp = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blog/create`, formData, {
         headers: { 
           authorization: getToken(),
           "Content-Type": "multipart/form-data",
@@ -112,7 +112,7 @@ const BlogEditorTipTap: React.FC = () => {
       <div className="lg:col-span-3 col-span-12 py-24">
         <ImageToUrlParent/>
       </div>
-      <div className="lg:col-span-6 col-span-12 text-black">
+      <div className="lg:col-span-6 col-span-12 text-black ">
         <Tiptap setContent={setContent} />
       </div>
       <div className="lg:col-span-3 col-span-12 mt-2">

@@ -17,10 +17,10 @@ import BlogMetaDescriptionTaker from "../../components/BlogMetaDescriptionTaker"
 import Tiptap from "../../components/BlogEditor";
 import { BLogType } from "@/types/Types";
 
-const baseUrl = process.env.BASE_URL;
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 export const fetchBlogByTitle = async (title: string) => {
   try {
-    const res = await fetch(`http://localhost:3001/api/v1/blog/url/${title}`, {
+    const res = await fetch(`${baseUrl}/api/v1/blog/url/${title}`, {
       next: { revalidate: 60 },
     });
 
@@ -90,7 +90,7 @@ for (const [key, value] of formData.entries()) {
   try {
     setIsPosting(true);
     const resp = await axios.put(
-      `http://localhost:3001/api/v1/blog/edit/${blog?._id}`,
+      `${baseUrl}/api/v1/blog/edit/${blog?._id}`,
       formData,
       {
         headers: {
@@ -113,16 +113,16 @@ for (const [key, value] of formData.entries()) {
   }
 }
   const fetchblog = async () => {
-    const resp = await fetchBlogByTitle(slug);
-    setBlog(resp.blog);
-    setContent(resp.blog.content || "");
-    setTitle(resp.blog.title || "");
-    setUrl(resp.blog.url || "");
-    setMetaDescription(resp.blog.metaDescription || "");
-    setCategoryId(resp.blog.category || "");
-    setTags(resp.blog.tags || []);
-    setFile(resp.blog.image || null)
-    console.log(resp.blog.image)
+    const {blog}:{blog:BLogType} = await fetchBlogByTitle(slug);
+    setBlog(blog);
+    setContent(blog.content || "");
+    setTitle(blog.title || "");
+    setUrl(blog.url || "");
+    setMetaDescription(blog.metaDescription || "");
+    setCategoryId(blog.category._id || "");
+    setTags(blog.tags || []);
+    setFile(blog.image || null)
+    console.log(blog.image)
   };
 
   React.useEffect(() => {

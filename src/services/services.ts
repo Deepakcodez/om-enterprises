@@ -236,7 +236,7 @@ const delelteBlog = async (id: string) => {
 
 const uploadImageAndGetUrl = async (file: FormData) => {
   try {
-    const resp = await axios.post(`http://localhost:3001/api/v1/blog/imgtourl`, file, {
+    const resp = await axios.post(`${BASE_URL}/api/v1/blog/imgtourl`, file, {
 
       headers: {
         authorization: getToken()
@@ -255,7 +255,7 @@ const handleCreateCategory = async (categoryName: string) => {
     return
   }
  try {
-   const resp = await axios.post(`http://localhost:3001/api/v1/blog/create/category`, { name: categoryName }, {
+   const resp = await axios.post(`${BASE_URL}/api/v1/blog/create/category`, { name: categoryName }, {
  
      headers: {
        authorization: getToken()
@@ -271,7 +271,7 @@ const handleCreateCategory = async (categoryName: string) => {
 
 const fetchCategory = async () => {
   try {
-    const resp = await axios.get(`http://localhost:3001/api/v1/blog/categories`, {
+    const resp = await axios.get(`${BASE_URL}/api/v1/blog/categories`, {
       headers: {
         authorization: getToken()
       }

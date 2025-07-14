@@ -1,15 +1,18 @@
 import { Suspense } from 'react'
 import Loading from './loading'
 import ErrorBoundary from '@/utills/ErrorBoundary'
-import AllBlogWithPagination from './components/allBlog.tsx/AllBlogWithPagination'
 import BannerBlog from './components/common/BannerBlog'
 import EditButton from './[title]/components/EditButton'
+import AllBlogWithPagination from './components/allBlog.tsx/AllBlogWithPagination'
 
 async function getBlogs () {
   try {
-    const res = await fetch(`${process.env.BASE_URL}/api/v1/blog/all`, {
-      next: { revalidate: 3600 }
-    })
+    const res = await fetch(
+      `https://api.omenterprisesgroup.in/api/v1/blog/all`,
+      {
+        next: { revalidate: 3600 }
+      }
+    )
 
     if (!res.ok) throw new Error('Failed to fetch blogs')
     return await res.json()
@@ -24,8 +27,8 @@ export default async function BlogPage () {
 
   return (
     <>
-      <div className=' flex w-full mx-auto md:max-w-7xl my-12'>
-        <EditButton title={"/blog/editor"} />
+      <div className=' flex w-full mx-auto md:max-w-7xl my-12 overflow-hidden'>
+        <EditButton title={'/'} />
         <ErrorBoundary
           fallback={
             <div className='text-red-500'>

@@ -37,12 +37,12 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         setIsValidated(true)
       } else {
         setIsValidated(false)
-        navigate.push('/admin/login')
+        navigate.push('/login')
       }
     } catch (error) {
       console.error('Admin validation failed:', error)
       setIsValidated(false)
-      navigate.push ('/admin/login')
+      navigate.push ('/login')
     } finally {
       setIsLoading(false)
     }

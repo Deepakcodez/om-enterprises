@@ -20,17 +20,17 @@ const Header: React.FC = () => {
         <div className="flex items-center gap-6">
           {/* bell icon */}
           <div onClick={()=>setShowNotification(!showNotification)} className="relative  ">
-            <Image src={Bell} alt="Bell" className="h-auto w-auto" width={100} height={100} />
+            <Image src={Bell} alt="Bell" className="h-4 w-auto" width={100} height={100} />
           </div>
 
           {/* profile */}
           <Link href={"/admin/account"} className="flex items-center gap-2">
             <Image
               width={30}
-             
+              height={30}
               src={avatar}
               alt="profilePic"
-              className="h-8 rounded-full bg-gray-500"
+              className="h-8 w-auto rounded-full bg-gray-500"
             />
             <div className="flex flex-col gap-0">
               <h1 className="leading-none text-black">Anil Verma</h1>
