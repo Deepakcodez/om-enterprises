@@ -24,6 +24,17 @@ const fetchTeamMates = async () => {
   }
 };
 
+  async function fetchAllBlogsWithPagination(page: number) {
+            try {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/v1/blog/withpagination?page=${page}&limit=12`)
+
+                const data = await res.json()
+                return {blogs : data.blogs, currentPage: data.currentPage, totalPages: data.totalPages, totalBlogs: data.totalBlogs}
+            } catch (error) {
+                console.error(error)
+            } 
+        }
+
 const fetchAllJobs = async () => {
   try {
     const response = await axios.get(
@@ -385,6 +396,13 @@ const getBlogsCategory = () => {
     staleTime: 1000 * 60 * 5 // 5 minutes
   });
 };
+const getBlogsWithPagination = (page:number) => {
+  return queryOptions({
+       queryKey: ["blogsWithPagination", page], 
+    queryFn: () => fetchAllBlogsWithPagination(page),
+    staleTime: 1000 * 60 * 5 // 5 minutes
+  });
+};
 
 
 
@@ -409,4 +427,5 @@ export {
   handleCreateCategory,
   getBlogsCategory,
   getAllBlogs,
+  getBlogsWithPagination
 };

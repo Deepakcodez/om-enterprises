@@ -4,6 +4,7 @@ import ErrorBoundary from '@/utills/ErrorBoundary'
 import BannerBlog from './components/common/BannerBlog'
 import EditButton from './[title]/components/EditButton'
 import AllBlogWithPagination from './components/allBlog.tsx/AllBlogWithPagination'
+import AllblogSkelton from './components/allBlog.tsx/AllblogSkelton'
 
 async function getBlogs () {
   try {
@@ -49,7 +50,7 @@ export default async function BlogPage () {
             </div>
           }
         >
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<AllblogSkelton />}>
             <AllBlogWithPagination />
           </Suspense>
         </ErrorBoundary>

@@ -42,7 +42,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
 }
 
 const DefaultFallback = ({ error }: { error?: Error }) => (
-  <div className="error-boundary-fallback">
+  <div className="error-boundary-fallback h-[45rem] w-full flex flex-col justify-center items-center text-center bg-red-100 text-red-600 p-4">
     <h2>Something went wrong</h2>
     <p>{error?.message}</p>
     <button 

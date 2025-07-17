@@ -2,20 +2,24 @@ import React from 'react'
 import Blog from '../components/common/Blog'
 
 import { Metadata, ResolvingMetadata } from 'next'
-import TableOfContents from './components/TableOfContent'
+// import TableOfContents from './components/TableOfContent'
 import BlogSkelton from './components/BlogSkelton'
+import { getAllBlogs } from '@/services/services'
+import ErrorPage from '@/app/_components/common/Error'
 
 type Props = {
   params: Promise<{ title: string }>
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 const baseUrl = process.env.BASE_URL
+
 const fetchBlogByTitle = async (title: string) => {
   try {
     const res = await fetch(`${baseUrl}/api/v1/blog/url/${title}`, {
-      next: { revalidate: 60 }
+      next: { 
+        tags: [`blog:${title}`]
+      }
     })
-
     if (!res.ok) throw new Error('Failed to fetch blog')
     return await res.json()
   } catch (error) {
@@ -23,6 +27,17 @@ const fetchBlogByTitle = async (title: string) => {
     return null
   }
 }
+// Generate static paths at build time
+export async function generateStaticParams () {
+  const blogs = await getAllBlogs()
+  console.log('Blogs:', blogs)
+  return blogs.map((blog: { url: string }) => ({
+    title: blog.url
+  }))
+}
+
+// Set revalidation time (ISR)
+export const revalidate = 60 // Revalidate every minute
 
 export async function generateMetadata (
   { params }: Props,
@@ -91,7 +106,9 @@ const SingleBlogPage = async ({
 
     if (!data?.blog) {
       return (
-        <h1 className='text-center text-2xl font-bold py-12'>Blog not found</h1>
+        <h1 className='text-center text-2xl font-bold py-12 h-[50vh] flex items-center justify-center'>
+          Blog not found
+        </h1>
       )
     }
 
@@ -109,11 +126,7 @@ const SingleBlogPage = async ({
       </div>
     )
   } catch (error) {
-    return (
-      <h1 className='text-center text-2xl font-bold py-12'>
-        Error loading blog
-      </h1>
-    )
+    return <ErrorPage />
   }
 }
 

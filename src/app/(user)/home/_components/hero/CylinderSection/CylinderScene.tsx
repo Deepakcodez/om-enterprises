@@ -16,16 +16,30 @@ export default function CylinderScene () {
     autoRotateSpeed: { value: 1, min: 0, max: 5, step: 0.1 }
   })
 
-  // Disable Y-axis rotation and zoom in OrbitControls
-  useEffect(() => {
-    if (controlsRef.current) {
-      controlsRef.current.minPolarAngle = Math.PI / 2 // Lock vertical rotation
-      controlsRef.current.maxPolarAngle = Math.PI / 2
-      controlsRef.current.enableZoom = false // Disable zoom
-    }
-  }, [])
 
-  // Auto-rotation animation
+   useEffect(() => {
+    if (controlsRef.current) {
+      controlsRef.current.minPolarAngle = Math.PI / 2
+      controlsRef.current.maxPolarAngle = Math.PI / 2
+      controlsRef.current.enableZoom = false
+    }
+
+    // Fix texture stretching by setting proper repeat and offset
+    if (texture) {
+      texture.wrapS = THREE.RepeatWrapping
+      texture.wrapT = THREE.RepeatWrapping
+      texture.repeat.set(1, 1) // Adjust these values based on your texture
+      texture.offset.set(0, 0)
+    }
+  }, [texture])
+
+  useFrame(() => {
+    if (meshRef.current) {
+      meshRef.current.rotation.y += 0.005 * autoRotateSpeed
+    }
+  })
+
+
   useFrame(() => {
     if (meshRef.current) {
       meshRef.current.rotation.y += 0.005 * autoRotateSpeed
@@ -53,14 +67,13 @@ export default function CylinderScene () {
       </mesh>
       <EffectComposer>
         <Bloom
-          intensity={10.0} // The bloom intensity.
+          intensity={2.0} // The bloom intensity.
           blurPass={undefined} // A blur pass.
-          luminanceThreshold={0.7} // luminance threshold. Raise this value to mask out darker elements in the scene.
+          luminanceThreshold={0.2} // luminance threshold. Raise this value to mask out darker elements in the scene.
           luminanceSmoothing={0.025} // smoothness of the luminance threshold. Range is [0, 1]
           mipmapBlur={true}
         />
       </EffectComposer>
-      // Enables or disables mipmap blur.
     </>
   )
 }

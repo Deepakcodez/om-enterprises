@@ -3,14 +3,18 @@ import React from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import CylinderScene from './CylinderScene'
+import Earth from './earth'
+import IconBase from './IconBase'
 
 export default function MovingCylinder () {
   return (
     <Canvas>
         <OrbitControls />
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
+        <ambientLight intensity={5} />
+        {/* <directionalLight position={[10, 10, 5]} intensity={1} /> */}
         <CylinderScene />
+        <Earth/>
+        {/* <IconBase/> */}
     </Canvas>   
   )
 }
