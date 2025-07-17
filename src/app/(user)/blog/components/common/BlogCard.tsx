@@ -10,21 +10,11 @@ import React from 'react'
 
 const BlogCard = ({ blog }: { blog: BLogType }) => {
 
-  const handleRightClick = (e: React.MouseEvent, url: string | undefined) => {
-    e.preventDefault()
-    navigator.clipboard.writeText(url || '')
-      .then(() => {
-        alert('Blog URL copied to clipboard!')
-      })
-      .catch(err => {
-        console.error('Failed to copy URL:', err)
-        alert('Failed to copy URL')
-      })
-  }
+  
   return (
     <Navigator to={blog.url?   `/blog/${blog?.url}` :  `/blog/${slugify(blog?.title)}`}>
       <div 
-      onClick={(e) => ()=>handleRightClick(e, blog?.url)}
+ 
       className='flex flex-col gap-2 bg-purple-50 md:p-4 p-2 md:rounded-2xl rounded-md h-full w-full '>
         <Image
           src={blog?.image || '../../../../../assets/images/blogbanner.png'}

@@ -6,6 +6,7 @@ import { Metadata, ResolvingMetadata } from 'next'
 import BlogSkelton from './components/BlogSkelton'
 import { getAllBlogs } from '@/services/services'
 import ErrorPage from '@/app/_components/common/Error'
+import TableOfContents from './components/TableOfContent'
 
 type Props = {
   params: Promise<{ title: string }>
@@ -112,6 +113,8 @@ const SingleBlogPage = async ({
       )
     }
 
+   
+
     return (
       <div className='grid grid-cols-12 lg:gap-3'>
         <div className='lg:col-span-3 hidden lg:flex py-12'>
@@ -121,7 +124,7 @@ const SingleBlogPage = async ({
           {data?.blog ? <Blog blog={data.blog} /> : <BlogSkelton />}
         </div>
         <div className='lg:col-span-3 hidden lg:flex'>
-          {/* <TableOfContents/> */}
+          <TableOfContents blogContent={data.blog.content} />
         </div>
       </div>
     )

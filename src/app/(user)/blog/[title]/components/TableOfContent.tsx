@@ -1,72 +1,59 @@
-'use client'
+"use client"
+import React, { useState, useEffect } from 'react';
 
-import React, { useEffect, useState } from 'react'
-
-type Heading = {
-  id: string
-  text: string
-  level: number
-}
-
-const TableOfContents = () => {
-  const [headings, setHeadings] = useState<Heading[]>([])
+const TableOfContents = ({ blogContent }: { blogContent: string }) => {
+  const [headings, setHeadings] = useState<Array<{id: string, text: string, level: number}>>([]);
 
   useEffect(() => {
-    const content = document.querySelector('.tiptap')
-    console.log('content--->', content);
+    // Create a temporary DOM element to parse the HTML
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(blogContent, 'text/html');
     
-    if (!content) return
+    // Extract headings from the parsed content
+    const headingElements = Array.from(doc.querySelectorAll('h1, h2, h3'));
+    console.log("headingElements:", headingElements);
 
-    const spanHeadings = content.querySelectorAll('p > span')
+    const extractedHeadings = headingElements.map((heading, index) => {
+      const id = `section-${index}`;
+      return {
+        id,
+        text: heading.textContent || '',
+        level: parseInt(heading.tagName.substring(1))
+      };
+    });
 
-    const newHeadings: Heading[] = []
-    let index = 0
+    setHeadings(extractedHeadings);
+  }, [blogContent]);
 
-    spanHeadings.forEach((span) => {
-      const style = window.getComputedStyle(span)
-      const fontSize = parseFloat(style.fontSize)
-
-      if (fontSize >= 24) { // Treat large font as heading
-        const text = span.textContent?.trim() || `heading-${index}`
-        const id = `heading-${index}`
-        span.setAttribute('id', id)
-
-        newHeadings.push({
-          id,
-          text,
-          level: fontSize >= 28 ? 2 : 3, // use size to define depth
-        })
-
-        index++
-      }
-    })
-
-    setHeadings(newHeadings)
-  }, [])
-
-  const handleClick = (id: string) => {
-    const el = document.getElementById(id)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start',
+        inline: 'nearest'
+      });
     }
-  }
+  };
 
   return (
-    <div className="sticky top-20 bg-white border p-4 rounded-xl shadow-md max-w-sm">
-      <h2 className="font-bold text-lg mb-3">Table of Contents</h2>
-      <ul className="space-y-2">
-        {headings.map(h => (
-          <li
-            key={h.id}
-            className={`cursor-pointer text-sm pl-${(h.level - 2) * 4}`}
-            onClick={() => handleClick(h.id)}
+    <div className="sticky top-4 w-full p-4 border border-gray-200 rounded-lg shadow-md bg-white text-black">
+      <h2 className="text-xl font-bold mb-4">Table of Contents</h2>
+      <ul className="space-y-2 max-h-[80vh] overflow-y-auto">
+        {headings.map((heading) => (
+          <li 
+            key={heading.id}
+            className={`cursor-pointer hover:text-blue-600 transition-colors 
+              ${heading.level === 1 ? 'pl-0 font-medium' : 
+                heading.level === 2 ? 'pl-4' : 'pl-8'}`}
+            onClick={() => scrollToSection(heading.id)}
           >
-            {h.text}
+            {heading.text}
           </li>
         ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default TableOfContents
+export default TableOfContents;

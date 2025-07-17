@@ -8,6 +8,7 @@ import { Open_Sans } from 'next/font/google'
 import EditButton from '../../[title]/components/EditButton'
 import { FaChevronRight } from 'react-icons/fa'
 import blogPlaceholder from '@/assets/images/blogiamgeplaceholder.png.jpg'
+import DeleteBlogButton from '../../[title]/components/deleteBlog'
 const openSans = Open_Sans({
   subsets: ['latin'],
   weight: '400'
@@ -16,6 +17,8 @@ const openSans = Open_Sans({
 const Blog = ({ blog }: { blog: BLogType }) => {
   return (
     <div className='flex flex-col gap-4  bg-violet-5 rounded-2xl lg:p-12'>
+      <DeleteBlogButton blogId={blog._id} />
+
       <div className='text-md flex items-center gap-2 text-gray-500 mt-6 md:mt-0'>
         Blog
         <FaChevronRight className='font-thin' />
