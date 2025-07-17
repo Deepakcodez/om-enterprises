@@ -8,11 +8,12 @@ import WorldAnimation from "@/components/animation/World";
 import HeroContent from "./HeroContent";
 import WideScreenHandler from "@/components/WideScreenHandler";
 import Link from "next/link";
+import MovingCylinder from "./CylinderSection/MovingCylinder";
 
 const Hero: React.FC = () => {
   return (
     // <WideScreenHandler>
-      <div className="grid grid-cols-12 lg:h-[48rem] h-auto w-full relative overflow-hidden bg-OMlightBlu ">
+      <div className="grid grid-cols-12 lg:h-[48rem] h-auto w-full relative bg-OMlightBlue overflow-hidden  ">
         {/* <div className="absolute w-full  md:h-[48rem] z-10 ">
         <FloatingBalls/>
       </div> */}
@@ -39,6 +40,7 @@ const Hero: React.FC = () => {
           {/* <ThreeD /> */}
           {/* <GlobeDemo/> */}
           <WorldAnimation />
+          {/* <MovingCylinder/> */}
         </div>
 
         {/* Background Overlay */}
