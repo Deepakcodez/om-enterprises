@@ -1,5 +1,4 @@
 import React from 'react'
-import moment from 'moment'
 
 const ContactQueryCard:React.FC<any> = (props) => {
      console.log("contact", props)
@@ -20,7 +19,13 @@ const ContactQueryCard:React.FC<any> = (props) => {
       <div className='p-2 bg-gray-200 rounded-lg text-sm h-28 overflow-y-scroll scrollbar-hide'>
       <p>{props.message}</p>
       </div>
-      <h1 className='text-right text-sm text-black/50'>{moment(props.createdAt).format('MMMM Do YYYY, h:mm:ss a') }</h1>
+      <h1 className='text-right text-sm text-black/50'>
+       {new Intl.DateTimeFormat('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          }).format(new Date(props.createdAt))}
+      </h1>
     </div>
   )
 }

@@ -12,7 +12,7 @@ export default function EditButton ({ title  }: { title: string,  }) {
   } else
     return (
       <Navigator to={`/blog/editor/${title}`}>
-        <div className='absolute right-12 top-42 border border-OMblue shadow-lg p-2 rounded-full text-3xl font-bold text-black lg:text-4xl text-center bg-purple-200'>
+        <div className='absolute z-50 right-12 top-42 border border-OMblue shadow-lg p-2 rounded-full text-3xl font-bold text-black lg:text-4xl text-center bg-purple-200'>
           <Pen className='text-purple-800' />
         </div>
       </Navigator>

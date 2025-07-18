@@ -89,7 +89,7 @@ const BlogEditorTipTap: React.FC = () => {
       if (resp.status === 200) {
         toast.success('Blog created successfully')
         queryClient.invalidateQueries({ queryKey: ['blogs'] })
-        navigate.push('/blogs')
+        navigate.push('/blog')
       }
     } catch (error) {
       console.error(error)

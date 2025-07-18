@@ -5,6 +5,7 @@ import BannerBlog from './components/common/BannerBlog'
 import EditButton from './[title]/components/EditButton'
 import AllBlogWithPagination from './components/allBlog.tsx/AllBlogWithPagination'
 import AllblogSkelton from './components/allBlog.tsx/AllblogSkelton'
+import ErrorPage from '@/app/_components/common/Error'
 
 async function getBlogs () {
   try {
@@ -30,30 +31,18 @@ export default async function BlogPage () {
     <>
       <div className=' flex w-full mx-auto md:max-w-7xl my-12 overflow-hidden'>
         <EditButton title={'/'} />
-        <ErrorBoundary
-          fallback={
-            <div className='text-red-500'>
-              Something went wrong while loading the blog.
-            </div>
-          }
-        >
+        <ErrorBoundary fallback={<ErrorPage />}>
           <Suspense fallback={<Loading />}>
             <BannerBlog blog={blogs.toReversed()[0]} />
           </Suspense>
         </ErrorBoundary>
       </div>
       <div className='w-full'>
-        <ErrorBoundary
-          fallback={
-            <div className='text-red-500'>
-              Something went wrong while loading the blog.
-            </div>
-          }
-        >
+        <ErrorBoundary fallback={<ErrorPage />}>
           <Suspense fallback={<AllblogSkelton />}>
             <AllBlogWithPagination />
           </Suspense>
-        </ErrorBoundary>
+        </ErrorBoundary>  
       </div>
     </>
   )

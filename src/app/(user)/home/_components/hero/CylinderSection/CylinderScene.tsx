@@ -11,11 +11,6 @@ export default function CylinderScene () {
   const controlsRef = useRef<any>(null)
   const texture = useTexture('/cylindertexture.png')
 
-  // Auto-rotation speed control
-  const { autoRotateSpeed } = useControls({
-    autoRotateSpeed: { value: 1, min: 0, max: 5, step: 0.1 }
-  })
-
 
    useEffect(() => {
     if (controlsRef.current) {
@@ -35,14 +30,14 @@ export default function CylinderScene () {
 
   useFrame(() => {
     if (meshRef.current) {
-      meshRef.current.rotation.y += 0.005 * autoRotateSpeed
+      meshRef.current.rotation.y += 0.005 * 0.5
     }
   })
 
 
   useFrame(() => {
     if (meshRef.current) {
-      meshRef.current.rotation.y += 0.005 * autoRotateSpeed
+      meshRef.current.rotation.y += 0.005 * 0.5
     }
   })
 

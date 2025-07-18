@@ -34,7 +34,6 @@ export const fetchBlogByTitle = async (title: string) => {
 
 const BlogEditorTipTap = ({ slug }: { slug: string }) => {
   const [isPosting, setIsPosting] = useState<boolean>(false);
-  const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [file, setFile] = useState<File | string | null>(null);
@@ -76,7 +75,6 @@ const handleSubmit = async () => {
 
   const formData = new FormData();
   formData.append('title', title);
-  console.log(formData)
   formData.append('content', content);
   formData.append('url', url);
   formData.append('categoryId', categoryId);
@@ -85,7 +83,6 @@ const handleSubmit = async () => {
   
   if (file) formData.append('image', file);
 for (const [key, value] of formData.entries()) {
-  console.log(key, value);
 }
   try {
     setIsPosting(true);
@@ -106,7 +103,6 @@ for (const [key, value] of formData.entries()) {
       
     }
   } catch (error) {
-    console.error(error);
     toast.error('Something went wrong');
   } finally {
     setIsPosting(false);
@@ -122,7 +118,6 @@ for (const [key, value] of formData.entries()) {
     setCategoryId(blog.category._id || "");
     setTags(blog.tags || []);
     setFile(blog.image || null)
-    console.log(blog.image)
   };
 
   React.useEffect(() => {

@@ -7,12 +7,51 @@ import BlogSkelton from './components/BlogSkelton'
 import { getAllBlogs } from '@/services/services'
 import ErrorPage from '@/app/_components/common/Error'
 import TableOfContents from './components/TableOfContent'
+import { JSDOM } from 'jsdom' 
+import { processBlogContent } from '@/utills/addTitleinBlog'
+
+export interface HeadingData {
+  id: string
+  text: string
+  level: number
+}
 
 type Props = {
   params: Promise<{ title: string }>
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 const baseUrl = process.env.BASE_URL
+
+
+// export function processBlogContent(content: string): {
+//   processedContent: string
+//   headings: HeadingData[]
+// } {
+//   const dom = new JSDOM(content)
+//   const document = dom.window.document
+  
+//   // Find all headings
+//   const headingElements = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6'))
+  
+//   const headings: HeadingData[] = []
+  
+//   // Add IDs to headings and collect data
+//   headingElements.forEach((heading, index) => {
+//     const id = `section-${index}`
+//     heading.id = id
+    
+//     headings.push({
+//       id,
+//       text: heading.textContent || '',
+//       level: parseInt(heading.tagName.substring(1))
+//     })
+//   })
+  
+//   return {
+//     processedContent: document.body.innerHTML,
+//     headings
+//   }
+// }
 
 const fetchBlogByTitle = async (title: string) => {
   try {
@@ -113,7 +152,8 @@ const SingleBlogPage = async ({
       )
     }
 
-   
+      // Process blog content on server side
+    const { processedContent, headings } = processBlogContent(data.blog.content)
 
     return (
       <div className='grid grid-cols-12 lg:gap-3'>
@@ -121,10 +161,10 @@ const SingleBlogPage = async ({
           {/* <Sidebar /> */}
         </div>
         <div className='lg:col-span-6 col-span-12'>
-          {data?.blog ? <Blog blog={data.blog} /> : <BlogSkelton />}
+          {data?.blog ? <Blog blog={{ ...data.blog, content: processedContent }} /> : <BlogSkelton />}
         </div>
         <div className='lg:col-span-3 hidden lg:flex'>
-          <TableOfContents blogContent={data.blog.content} />
+          <TableOfContents headings={headings} />
         </div>
       </div>
     )

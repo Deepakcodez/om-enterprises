@@ -1,6 +1,5 @@
 import { BLogType } from '@/types/Types'
 import { Clock } from 'lucide-react'
-import moment from 'moment'
 import Image from 'next/image'
 import React from 'react'
 import './blogeditor.css'
@@ -22,7 +21,7 @@ const Blog = ({ blog }: { blog: BLogType }) => {
       <div className='text-md flex items-center gap-2 text-gray-500 mt-6 md:mt-0'>
         Blog
         <FaChevronRight className='font-thin' />
-        {blog?.category?.name || 'Untitled'}
+        {blog?.category?.name || 'UnCategorized'}
       </div>
       {blog && <EditButton title={blog?.url} />}
 
@@ -40,7 +39,7 @@ const Blog = ({ blog }: { blog: BLogType }) => {
       </div>
       <div className={openSans.className}>
         <div className='flex flex-col gap-12 '>
-          <h1 className='text-black  text-    text-3xl '>{blog?.title}</h1>
+          <h1 className='text-black  font-bold   text-4xl '>{blog?.title}</h1>
           <div>
             <article
               className={`text-gray-800 prose max-w-none`}
@@ -49,7 +48,14 @@ const Blog = ({ blog }: { blog: BLogType }) => {
           </div>
           <div className='flex  items-center justify-end gap-2 text-gray-500'>
             <Clock className='text-purple-500 ' size={15} />
-            <p className=''>{moment(blog?.createdAt).format('MMM Do YY')}</p>
+            <p className=''>
+              {' '}
+              {new Intl.DateTimeFormat('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              }).format(new Date(blog.date))}
+            </p>
           </div>
         </div>
       </div>

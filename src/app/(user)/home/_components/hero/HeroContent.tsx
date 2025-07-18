@@ -13,9 +13,9 @@ const HeroContent: React.FC = () => {
       <div className="flex flex-col gap-3 text-xl text-primary font-semibold justify-center lg:items-start items-center ">
         <p className="text-sm md:text-bas e">BEST MARKETING SERVICE</p>
         <h1 className="2xl:text-7xl md:text-[4vw] text-4xl text-center lg:text-start  leading-tight font-bold text-blue-950">
-          India&apos;s No. 1 Bulk
+          India&apos;s No. 1 
           <br />
-          SMS Platform
+          Digital Marketing Platform
         </h1>
 
         <p className=" text-violet-950/50 text-sm md:text-base  font-normal text-center lg:text-start">
