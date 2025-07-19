@@ -4,7 +4,7 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import CylinderScene from './CylinderScene'
 import Earth from './earth'
-import IconBase from './IconBase'
+
 
 export default function MovingCylinder () {
   return (

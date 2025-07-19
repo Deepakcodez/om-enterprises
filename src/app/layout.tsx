@@ -49,7 +49,7 @@ export default function RootLayout ({
           <LenisProvider>
             <LoaderLayout />
             <div className='md:block hidden'>
-              <SmoothCursor />
+              {/* <SmoothCursor /> */}
             </div>
             <LayoutSelector>{children}</LayoutSelector>
             <Toaster position='bottom-right' />

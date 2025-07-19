@@ -490,7 +490,7 @@ const Tiptap = ({
               </div>
             </FloatingMenu>
           )}
-          <div className='h-[45rem] overflow-y-scroll scrollbar-hide text-black'>
+          <div className='h-[45rem] overflow-y-scroll  text-black'>
             <EditorContent editor={editor}  className="tiptap" />
           </div>
 

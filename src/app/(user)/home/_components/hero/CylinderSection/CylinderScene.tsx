@@ -3,7 +3,6 @@ import { useTexture, OrbitControls } from '@react-three/drei'
 import React, { useRef, useEffect } from 'react'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
-import { useControls } from 'leva'
 import { Bloom, EffectComposer } from '@react-three/postprocessing'
 
 export default function CylinderScene () {

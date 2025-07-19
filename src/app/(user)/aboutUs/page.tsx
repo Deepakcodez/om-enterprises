@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import AboutUs from "./components/About";
-
+import aboutusOG from "@/assets/images/blog.jpeg";
 export const metadata: Metadata = {
   title: 'About Us',
   description: 'Learn about our mission, values, and the team behind Your Company Name. Discover what makes us unique and why we do what we do.',
@@ -13,10 +13,10 @@ export const metadata: Metadata = {
     siteName: 'OM ENTERPRISES GROUP',
     images: [
       {
-        url: "../assets/icons/favicon.ico",
+        url: aboutusOG.src,
         width: 1200,
         height: 630,
-        alt: 'Your Company Name Team Photo',
+        alt: 'omenterprisesgroup.in - About Us',
       },
     ],
     locale: 'en_US',
@@ -26,11 +26,11 @@ export const metadata: Metadata = {
   // Twitter
   twitter: {
     card: 'summary_large_image',
-    title: 'About Us',
-    description: 'Discover the story behind Your Company Name and meet the team driving our success.',
-    images: "../assets/icons/favicon.ico",
-    site: '@yourcompany',
-    creator: '@yourcompany',
+    title: 'About Us | OM ENTERPRISES GROUP',
+    description: 'Discover the story behind OM ENTERPRISES GROUP and meet the team driving our success.',
+    images: aboutusOG.src,
+    site: '@omenterprisesgroup',
+    creator: '@omenterprisesgroup',
   },
 
   // Additional metadata
@@ -50,10 +50,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
-  },
+  
   themeColor: '#ffffff',
   manifest: '/site.webmanifest',
   authors: [
@@ -73,8 +70,8 @@ export const metadata: Metadata = {
 
 export default function AboutUsPage() {
   return (
-    <main>
+    <section>
       <AboutUs />
-    </main>
+    </section>
   );
 }
